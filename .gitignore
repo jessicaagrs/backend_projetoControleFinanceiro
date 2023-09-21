@@ -1,0 +1,14 @@
+colecoes.md
+bin/
+obj/
+installer/*.exe
+installers/*.exe
+OutPut/
+*.suo
+INSTALLERS/
+*.users
+/packages
+.vs/
+*.user
+packages/
+.nuget/
