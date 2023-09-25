@@ -37,15 +37,20 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             _usuarioRepositorio.DeleteUsuarioAsync(usuarioId);
         }
 
-        public async Task<Usuario> Atualizar(string usuarioId, Usuario usuario)
+        public async Task<Usuario> Atualizar(Usuario usuario)
         {
-            if (usuario == null || string.IsNullOrEmpty(usuarioId))
+            if (usuario == null)
                 throw new Exception("Dados inválidos.");
 
             CriptografarSenha(usuario);
             await VerificarDuplicidadeEmail(usuario.Email, DatabaseStatus.Edicao.ToString());
             ValidarEstruturaEmail(usuario.Email);
-            var atualizacao = await _usuarioRepositorio.UpdateUsuarioAsync(usuarioId, usuario);
+            var usuarios = await _usuarioRepositorio.GetUsuariosAsync();
+            var existeUsuario = usuarios.FirstOrDefault(u => u.Id == usuario.Id);
+
+            if (existeUsuario == null)
+                throw new Exception("O usuário não existe");
+            var atualizacao = await _usuarioRepositorio.UpdateUsuarioAsync(usuario);
 
             return atualizacao;
         }

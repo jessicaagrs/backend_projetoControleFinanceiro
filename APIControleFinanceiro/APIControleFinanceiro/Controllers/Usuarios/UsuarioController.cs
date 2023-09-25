@@ -78,11 +78,11 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Put(string usuarioId, [FromBody] Usuario usuario)
+        public async Task<IActionResult> Put([FromBody] Usuario usuario)
         {
             try
             {
-                var usuarioAtualizado = await _usuarioServico.Atualizar(usuarioId, usuario);
+                var usuarioAtualizado = await _usuarioServico.Atualizar(usuario);
                 return Ok(usuarioAtualizado);
             }
             catch (Exception ex)

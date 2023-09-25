@@ -1,16 +1,16 @@
 ﻿using APIControleFinanceiro.Models.Database;
 using APIControleFinanceiro.Models.Usuarios;
+using APIControleFinanceiro.Repositorios.Database;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace APIControleFinanceiro.Servicos.Usuarios
+namespace APIControleFinanceiro.Repositorios.Usuarios
 {
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private readonly IMongoCollection<Usuario> _usuarioCollection;
 
-        public UsuarioRepositorio(IOptions<DatabaseSettings> settings)
+        public UsuarioRepositorio(IOptions<UsuariosDatabaseSettings> settings)
         {
             var mongoClient = new MongoClient(settings.Value.ConnectionString);
             var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
@@ -35,9 +35,9 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             await _usuarioCollection.DeleteOneAsync(x => x.Id == usuarioId);
         }
 
-        public async Task<Usuario> UpdateUsuarioAsync(string usuarioId, Usuario usuario)
+        public async Task<Usuario> UpdateUsuarioAsync(Usuario usuario)
         {
-            await _usuarioCollection.ReplaceOneAsync(x => x.Id == usuarioId, usuario);
+            await _usuarioCollection.ReplaceOneAsync(x => x.Id == usuario.Id, usuario);
             return usuario;
         }
 

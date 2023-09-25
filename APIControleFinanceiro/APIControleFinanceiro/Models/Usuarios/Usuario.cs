@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace APIControleFinanceiro.Models.Usuarios
 {
+    [BsonIgnoreExtraElements]
     public class Usuario
     {
         [BsonId]
