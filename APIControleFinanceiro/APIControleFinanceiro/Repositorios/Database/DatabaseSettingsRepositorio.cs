@@ -11,4 +11,9 @@ namespace APIControleFinanceiro.Repositorios.Database
     {
 
     }
+
+    public class CategoriasDespesasDatabaseSettings : DatabaseSettings
+    {
+
+    }
 }

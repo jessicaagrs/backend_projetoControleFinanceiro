@@ -1,18 +1,18 @@
 ﻿
-using APIControleFinanceiro.Models.CategoriasReceitas;
+using APIControleFinanceiro.Models.CategoriasDespesas;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers.CategoriasReceitas
+namespace API.Controllers.CategoriasDespesas
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoriasReceitasController : ControllerBase
+    public class CategoriasDespesasController : ControllerBase
     {
-        private ICategoriaReceitaServico _categoriaReceitaServico;
+        private ICategoriaDespesaServico _categoriaDespesaServico;
 
-        public CategoriasReceitasController(ICategoriaReceitaServico categoriaReceitaServico)
+        public CategoriasDespesasController(ICategoriaDespesaServico categoriaDespesaServico)
         {
-            _categoriaReceitaServico = categoriaReceitaServico;
+            _categoriaDespesaServico = categoriaDespesaServico;
         }
 
         [HttpGet()]
@@ -20,14 +20,14 @@ namespace API.Controllers.CategoriasReceitas
         {
             try
             {
-                var categorias = await _categoriaReceitaServico.ObterTodos();
+                var categorias = await _categoriaDespesaServico.ObterTodos();
                 return Ok(categorias);
             }
             catch (Exception ex)
             {
                 var errorResponse = new
                 {
-                    Message = "Erro ao consultar categoria de receita",
+                    Message = "Erro ao consultar categoria de despesa",
                     Error = ex.Message
                 };
 
@@ -37,18 +37,18 @@ namespace API.Controllers.CategoriasReceitas
 
 
         [HttpPost()]
-        public async Task<IActionResult> Post([FromBody] CategoriaReceita categoriaReceita)
+        public async Task<IActionResult> Post([FromBody] CategoriaDespesa categoriaDespesa)
         {
             try
             {
-                var novaCategoria = await _categoriaReceitaServico.Adicionar(categoriaReceita);
+                var novaCategoria = await _categoriaDespesaServico.Adicionar(categoriaDespesa);
                 return Ok(novaCategoria);
             }
             catch (Exception ex)
             {
                 var errorResponse = new
                 {
-                    Message = "Erro ao adicionar categoria de receita",
+                    Message = "Erro ao adicionar categoria de despesa",
                     Error = ex.Message
                 };
 
@@ -57,19 +57,19 @@ namespace API.Controllers.CategoriasReceitas
         }
 
         [HttpDelete()]
-        [Route("/CategoriasReceitas/{categoriaId}")]
+        [Route("/CategoriasDespesas/{categoriaId}")]
         public IActionResult Delete(string categoriaId)
         {
             try
             {
-                _categoriaReceitaServico.Remover(categoriaId);
-                return Ok($"Categoria de receita {categoriaId} removida com sucesso");
+                _categoriaDespesaServico.Remover(categoriaId);
+                return Ok($"Categoria de despesa {categoriaId} removida com sucesso");
             }
             catch (Exception ex)
             {
                 var errorResponse = new
                 {
-                    Message = "Erro ao remover categoria de receita",
+                    Message = "Erro ao remover categoria de despesa",
                     Error = ex.Message
                 };
 
@@ -78,18 +78,18 @@ namespace API.Controllers.CategoriasReceitas
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Put([FromBody] CategoriaReceita categoriaReceita)
+        public async Task<IActionResult> Put([FromBody] CategoriaDespesa categoriaDespesa)
         {
             try
             {
-                var categoriaAtualizada = await _categoriaReceitaServico.Atualizar(categoriaReceita);
+                var categoriaAtualizada = await _categoriaDespesaServico.Atualizar(categoriaDespesa);
                 return Ok(categoriaAtualizada);
             }
             catch (Exception ex)
             {
                 var errorResponse = new
                 {
-                    Message = "Erro ao atualizar categoria de receita",
+                    Message = "Erro ao atualizar categoria de despesa",
                     Error = ex.Message
                 };
 

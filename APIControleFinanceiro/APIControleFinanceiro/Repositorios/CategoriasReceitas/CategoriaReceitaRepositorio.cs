@@ -1,5 +1,4 @@
-﻿using APIControleFinanceiro.Models.Database;
-using APIControleFinanceiro.Models.CategoriasReceitas;
+﻿using APIControleFinanceiro.Models.CategoriasReceitas;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using APIControleFinanceiro.Repositorios.Database;

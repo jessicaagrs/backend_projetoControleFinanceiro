@@ -1,7 +1,4 @@
 ﻿using APIControleFinanceiro.Models.CategoriasReceitas;
-using APIControleFinanceiro.Repositorios.CategoriasReceitas;
-using System.Text.RegularExpressions;
-using static APIControleFinanceiro.Models.Database.DatabaseSettings;
 
 namespace APIControleFinanceiro.Repositorios.CategoriasReceitas
 {
