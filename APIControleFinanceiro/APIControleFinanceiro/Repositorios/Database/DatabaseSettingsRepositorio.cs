@@ -16,4 +16,9 @@ namespace APIControleFinanceiro.Repositorios.Database
     {
 
     }
+
+    public class ReceitaDatabaseSettings : DatabaseSettings
+    {
+
+    }
 }
