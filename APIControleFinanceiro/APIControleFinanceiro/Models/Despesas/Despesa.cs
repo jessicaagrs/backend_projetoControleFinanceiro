@@ -1,11 +1,11 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-using System.Text.RegularExpressions;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace APIControleFinanceiro.Models.Receitas
+namespace APIControleFinanceiro.Models.Despesas
 {
-    public class Receita
+    public class Despesa
     {
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
@@ -19,6 +19,5 @@ namespace APIControleFinanceiro.Models.Receitas
         public string CategoriaId { get; set; } = string.Empty;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public DateTime Data { get; set; } = DateTime.MinValue;
-        
     }
 }

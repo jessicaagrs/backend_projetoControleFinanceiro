@@ -1,6 +1,9 @@
 ﻿
 using APIControleFinanceiro.Models.Usuarios;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System.Web.WebPages;
 
 namespace API.Controllers.Usuarios
 {

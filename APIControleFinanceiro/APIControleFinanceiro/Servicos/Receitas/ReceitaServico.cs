@@ -27,7 +27,6 @@ namespace APIControleFinanceiro.Repositorios.Receitas
             if (receita == null)
                 throw new Exception("Dados inválidos.");
 
-            receita.Validar(receita);
             await VerificarCategoria(receita.CategoriaId);
             await VerificarUsuario(receita.UsuarioId);
             return await _receitaRepositorio.CreateReceitaAsync(receita);
