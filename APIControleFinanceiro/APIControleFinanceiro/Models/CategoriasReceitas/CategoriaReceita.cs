@@ -7,7 +7,7 @@ namespace APIControleFinanceiro.Models.CategoriasReceitas
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public string Id { get; set; }
         public string Descricao { get; set; } = string.Empty;
     }
 }

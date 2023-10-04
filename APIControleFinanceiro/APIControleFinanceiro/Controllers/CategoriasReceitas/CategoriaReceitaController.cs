@@ -1,5 +1,6 @@
 ﻿
 using APIControleFinanceiro.Models.CategoriasReceitas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.CategoriasReceitas
@@ -16,6 +17,8 @@ namespace API.Controllers.CategoriasReceitas
         }
 
         [HttpGet()]
+        [Authorize]
+
         public async Task<IActionResult> Get()
         {
             try
@@ -37,6 +40,8 @@ namespace API.Controllers.CategoriasReceitas
 
 
         [HttpPost()]
+        [Authorize]
+
         public async Task<IActionResult> Post([FromBody] CategoriaReceita categoriaReceita)
         {
             try
@@ -57,6 +62,7 @@ namespace API.Controllers.CategoriasReceitas
         }
 
         [HttpDelete()]
+        [Authorize]
         [Route("/CategoriasReceitas/{categoriaId}")]
         public IActionResult Delete(string categoriaId)
         {
@@ -78,6 +84,7 @@ namespace API.Controllers.CategoriasReceitas
         }
 
         [HttpPut()]
+        [Authorize]
         public async Task<IActionResult> Put([FromBody] CategoriaReceita categoriaReceita)
         {
             try

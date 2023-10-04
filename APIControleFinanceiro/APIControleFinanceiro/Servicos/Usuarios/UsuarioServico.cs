@@ -56,19 +56,6 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             return atualizacao;
         }
 
-        public async Task LogarUsuario(Login dados)
-        {
-            var senhaValida = await VerificarSenhaLogin(dados.SenhaLogin, dados.EmailLogin);
-
-            if (!senhaValida)
-                throw new Exception("A senha não é válida.");
-
-            var usuario = await _usuarioRepositorio.GetUsuarioEmailAsync(dados.EmailLogin);
-
-            if (usuario is null)
-                throw new Exception("Não foi encontrado usuário com email correspondente.");
-        }
-
         private void ValidarEstruturaEmail(string email)
         {
             string regex = @"^([a-z]){1,}([a-z0-9._-]){1,}([@]){1}([a-z]){2,}([.]){1}([a-z]){2,}([.]?){1}([a-z]?){2,}$";
@@ -92,13 +79,6 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
             usuario.Senha = senhaCriptografada;
             return usuario;
-        }
-
-        private async Task<bool> VerificarSenhaLogin(string senha, string email)
-        {
-            var encontrarUsuario = await _usuarioRepositorio.GetUsuarioEmailAsync(email);
-
-             return BCrypt.Net.BCrypt.Verify(senha, encontrarUsuario.Senha);
         }
     }
 }

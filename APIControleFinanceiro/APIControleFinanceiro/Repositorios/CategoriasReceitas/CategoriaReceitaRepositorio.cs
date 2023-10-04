@@ -1,5 +1,4 @@
 ﻿using APIControleFinanceiro.Models.CategoriasReceitas;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using APIControleFinanceiro.Repositorios.Database;
 
@@ -9,12 +8,9 @@ namespace APIControleFinanceiro.Repositorios.CategoriasReceitas
     {
         private readonly IMongoCollection<CategoriaReceita> _categoriaReceitaCollection;
 
-        public CategoriaReceitaRepositorio(IOptions<CategoriasReceitasDatabaseSettings> settings)
+        public CategoriaReceitaRepositorio(MongoDBContext mongoDbContext)
         {
-            var mongoClient = new MongoClient(settings.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
-
-            _categoriaReceitaCollection = mongoDatabase.GetCollection<CategoriaReceita>(settings.Value.CollectionName);
+            _categoriaReceitaCollection = mongoDbContext.CategoriaReceitas;
         }
 
         public async Task<List<CategoriaReceita>> GetCategoriasReceitasAsync() =>

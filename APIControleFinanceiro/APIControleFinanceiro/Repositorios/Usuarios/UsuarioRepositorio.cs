@@ -1,7 +1,5 @@
-﻿using APIControleFinanceiro.Models.Database;
-using APIControleFinanceiro.Models.Usuarios;
+﻿using APIControleFinanceiro.Models.Usuarios;
 using APIControleFinanceiro.Repositorios.Database;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace APIControleFinanceiro.Repositorios.Usuarios
@@ -10,12 +8,9 @@ namespace APIControleFinanceiro.Repositorios.Usuarios
     {
         private readonly IMongoCollection<Usuario> _usuarioCollection;
 
-        public UsuarioRepositorio(IOptions<UsuariosDatabaseSettings> settings)
+        public UsuarioRepositorio(MongoDBContext mongoDbContext)
         {
-            var mongoClient = new MongoClient(settings.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
-
-            _usuarioCollection = mongoDatabase.GetCollection<Usuario>(settings.Value.CollectionName);
+            _usuarioCollection = mongoDbContext.Usuarios;
         }
 
         public async Task<List<Usuario>> GetUsuariosAsync() =>

@@ -8,7 +8,7 @@ namespace APIControleFinanceiro.Models.Despesas
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public string Id { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public decimal Valor { get; set; } = decimal.MinValue;
 

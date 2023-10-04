@@ -1,9 +1,8 @@
 ﻿
 using APIControleFinanceiro.Models.Usuarios;
-using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using System.Web.WebPages;
+using System.Data;
 
 namespace API.Controllers.Usuarios
 {
@@ -19,6 +18,7 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpGet()]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             try
@@ -40,6 +40,7 @@ namespace API.Controllers.Usuarios
 
 
         [HttpPost()]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
             try
@@ -60,6 +61,7 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpDelete()]
+        [Authorize]
         [Route("/Usuarios/{usuarioId}")]
         public IActionResult Delete(string usuarioId)
         {
@@ -81,6 +83,7 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpPut()]
+        [Authorize]
         public async Task<IActionResult> Put([FromBody] Usuario usuario)
         {
             try
@@ -99,26 +102,6 @@ namespace API.Controllers.Usuarios
                 return BadRequest(errorResponse);
             }
         }
-
-        [HttpPost()]
-        [Route("/Usuarios/Login")]
-        public async Task<IActionResult> Login(Login dados)
-        {
-            try
-            {
-                await _usuarioServico.LogarUsuario(dados);
-                return Ok("Login realizado com sucesso.");
-            }
-            catch (Exception ex)
-            {
-                var errorResponse = new
-                {
-                    Message = "Erro ao logar o usuário",
-                    Error = ex.Message
-                };
-
-                return BadRequest(errorResponse);
-            }
-        }
+      
     }
 }

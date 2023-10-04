@@ -1,5 +1,6 @@
 ﻿using APIControleFinanceiro.Models.Despesas;
 using APIControleFinanceiro.Repositorios.Despesas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Despesas
@@ -16,6 +17,8 @@ namespace API.Controllers.Despesas
         }
 
         [HttpGet()]
+        [Authorize]
+
         public async Task<IActionResult> Get()
         {
             try
@@ -37,6 +40,8 @@ namespace API.Controllers.Despesas
 
 
         [HttpPost()]
+        [Authorize]
+
         public async Task<IActionResult> Post([FromBody] Despesa despesa)
         {
             try
@@ -57,6 +62,8 @@ namespace API.Controllers.Despesas
         }
 
         [HttpDelete()]
+        [Authorize]
+
         [Route("/Despesas/{despesaId}")]
         public IActionResult Delete(string despesaId)
         {
@@ -78,6 +85,8 @@ namespace API.Controllers.Despesas
         }
 
         [HttpPut()]
+        [Authorize]
+
         public async Task<IActionResult> Put([FromBody] Despesa despesa)
         {
             try

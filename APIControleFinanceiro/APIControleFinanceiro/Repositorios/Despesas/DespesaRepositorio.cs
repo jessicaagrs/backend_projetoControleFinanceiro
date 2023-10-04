@@ -1,5 +1,4 @@
 ﻿using APIControleFinanceiro.Models.Despesas;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using APIControleFinanceiro.Repositorios.Database;
 
@@ -9,12 +8,9 @@ namespace APIControleFinanceiro.Repositorios.Despesas
     {
         private readonly IMongoCollection<Despesa> _despesaCollection;
 
-        public DespesaRepositorio(IOptions<DespesaDatabaseSettings> settings)
+        public DespesaRepositorio(MongoDBContext mongoDbContext)
         {
-            var mongoClient = new MongoClient(settings.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
-
-            _despesaCollection = mongoDatabase.GetCollection<Despesa>(settings.Value.CollectionName);
+            _despesaCollection = mongoDbContext.Despesas;
         }
 
         public async Task<List<Despesa>> GetReceitasAsync() =>
