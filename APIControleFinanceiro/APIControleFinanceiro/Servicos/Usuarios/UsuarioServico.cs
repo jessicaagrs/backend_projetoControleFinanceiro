@@ -26,6 +26,7 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             CriptografarSenha(usuario);
             await VerificarDuplicidadeEmail(usuario.Email, DatabaseStatus.Insercao.ToString());
             ValidarEstruturaEmail(usuario.Email);
+            usuario.Habilitado = true;
             return await _usuarioRepositorio.CreateUsuarioAsync(usuario);
         }
 

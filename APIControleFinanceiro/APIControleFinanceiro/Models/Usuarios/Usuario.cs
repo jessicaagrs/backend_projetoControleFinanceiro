@@ -13,7 +13,7 @@ namespace APIControleFinanceiro.Models.Usuarios
         public string Email { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
-        public bool UsuarioMaster { get; set; } = false;
+        public bool Habilitado { get; set; } = false;
     }
 
     public class Login
