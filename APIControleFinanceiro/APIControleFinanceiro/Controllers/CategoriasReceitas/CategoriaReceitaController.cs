@@ -18,7 +18,7 @@ namespace API.Controllers.CategoriasReceitas
 
         [HttpGet()]
         [Authorize]
-
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {
             try
@@ -41,7 +41,7 @@ namespace API.Controllers.CategoriasReceitas
 
         [HttpPost()]
         [Authorize]
-
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Post([FromBody] CategoriaReceita categoriaReceita)
         {
             try
@@ -64,12 +64,16 @@ namespace API.Controllers.CategoriasReceitas
         [HttpDelete()]
         [Authorize]
         [Route("/CategoriasReceitas/{categoriaId}")]
+        [ApiVersion("1.0")]
         public IActionResult Delete(string categoriaId)
         {
             try
             {
                 _categoriaReceitaServico.Remover(categoriaId);
-                return Ok($"Categoria de receita {categoriaId} removida com sucesso");
+                return Ok(new
+                {
+                    Mensagem = $"Categoria de receita {categoriaId} removida com sucesso"
+                });
             }
             catch (Exception ex)
             {
@@ -85,6 +89,7 @@ namespace API.Controllers.CategoriasReceitas
 
         [HttpPut()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Put([FromBody] CategoriaReceita categoriaReceita)
         {
             try

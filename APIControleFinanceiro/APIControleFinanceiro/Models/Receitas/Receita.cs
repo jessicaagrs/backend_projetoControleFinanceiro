@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using System.Text.RegularExpressions;
 
 namespace APIControleFinanceiro.Models.Receitas
 {
@@ -8,7 +7,7 @@ namespace APIControleFinanceiro.Models.Receitas
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public decimal Valor { get; set; } = decimal.MinValue;
 

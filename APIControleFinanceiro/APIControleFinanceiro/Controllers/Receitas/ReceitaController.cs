@@ -17,6 +17,7 @@ namespace API.Controllers.Receitas
 
         [HttpGet()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {
             try
@@ -39,6 +40,7 @@ namespace API.Controllers.Receitas
 
         [HttpPost()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Post([FromBody] Receita receita)
         {
             try
@@ -61,12 +63,16 @@ namespace API.Controllers.Receitas
         [HttpDelete()]
         [Authorize]
         [Route("/Receitas/{receitaId}")]
+        [ApiVersion("1.0")]
         public IActionResult Delete(string receitaId)
         {
             try
             {
                 _receitaServico.Remover(receitaId);
-                return Ok($"Receita {receitaId} removida com sucesso");
+                return Ok(new
+                {
+                    Mensagem = $"Receita {receitaId} removida com sucesso"
+                });
             }
             catch (Exception ex)
             {
@@ -82,6 +88,7 @@ namespace API.Controllers.Receitas
 
         [HttpPut()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Put([FromBody] Receita receita)
         {
             try

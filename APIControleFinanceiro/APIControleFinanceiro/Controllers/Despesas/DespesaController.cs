@@ -18,6 +18,7 @@ namespace API.Controllers.Despesas
 
         [HttpGet()]
         [Authorize]
+        [ApiVersion("1.0")]
 
         public async Task<IActionResult> Get()
         {
@@ -41,6 +42,7 @@ namespace API.Controllers.Despesas
 
         [HttpPost()]
         [Authorize]
+        [ApiVersion("1.0")]
 
         public async Task<IActionResult> Post([FromBody] Despesa despesa)
         {
@@ -63,6 +65,7 @@ namespace API.Controllers.Despesas
 
         [HttpDelete()]
         [Authorize]
+        [ApiVersion("1.0")]
 
         [Route("/Despesas/{despesaId}")]
         public IActionResult Delete(string despesaId)
@@ -70,7 +73,10 @@ namespace API.Controllers.Despesas
             try
             {
                 _despesaServico.Remover(despesaId);
-                return Ok($"Despesa {despesaId} removida com sucesso");
+                return Ok(new
+                {
+                    Mensagem = $"Despesa {despesaId} removida com sucesso"
+                });
             }
             catch (Exception ex)
             {
@@ -86,7 +92,7 @@ namespace API.Controllers.Despesas
 
         [HttpPut()]
         [Authorize]
-
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Put([FromBody] Despesa despesa)
         {
             try

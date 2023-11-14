@@ -26,7 +26,6 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             CriptografarSenha(usuario);
             await VerificarDuplicidadeEmail(usuario.Email, DatabaseStatus.Insercao.ToString());
             ValidarEstruturaEmail(usuario.Email);
-            usuario.Habilitado = true;
             return await _usuarioRepositorio.CreateUsuarioAsync(usuario);
         }
 
@@ -76,9 +75,14 @@ namespace APIControleFinanceiro.Servicos.Usuarios
 
         private Usuario CriptografarSenha(Usuario usuario)
         {
-            string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
-            usuario.Senha = senhaCriptografada;
+            if (!usuario.Senha.StartsWith("$2a$"))
+            {
+                string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
+                usuario.Senha = senhaCriptografada;
+            }
+
             return usuario;
         }
+
     }
 }

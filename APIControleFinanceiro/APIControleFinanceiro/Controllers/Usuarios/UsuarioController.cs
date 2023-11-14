@@ -19,6 +19,7 @@ namespace API.Controllers.Usuarios
 
         [HttpGet()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {
             try
@@ -40,7 +41,7 @@ namespace API.Controllers.Usuarios
 
 
         [HttpPost()]
-        [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Post([FromBody] Usuario usuario)
         {
             try
@@ -63,12 +64,16 @@ namespace API.Controllers.Usuarios
         [HttpDelete()]
         [Authorize]
         [Route("/Usuarios/{usuarioId}")]
+        [ApiVersion("1.0")]
         public IActionResult Delete(string usuarioId)
         {
             try
             {
                 _usuarioServico.Remover(usuarioId);
-                return Ok($"Usuario {usuarioId} removido com sucesso");
+                return Ok(new
+                {
+                    Mensagem = $"Usuario {usuarioId} removido com sucesso"
+                });
             }
             catch (Exception ex)
             {
@@ -84,6 +89,7 @@ namespace API.Controllers.Usuarios
 
         [HttpPut()]
         [Authorize]
+        [ApiVersion("1.0")]
         public async Task<IActionResult> Put([FromBody] Usuario usuario)
         {
             try

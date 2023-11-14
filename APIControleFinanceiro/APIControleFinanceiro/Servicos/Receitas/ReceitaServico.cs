@@ -2,7 +2,7 @@
 using APIControleFinanceiro.Models.Receitas;
 using APIControleFinanceiro.Models.Usuarios;
 
-namespace APIControleFinanceiro.Repositorios.Receitas
+namespace APIControleFinanceiro.Servicos.Receitas
 {
     public class ReceitaServico : IReceitaServico
     {
