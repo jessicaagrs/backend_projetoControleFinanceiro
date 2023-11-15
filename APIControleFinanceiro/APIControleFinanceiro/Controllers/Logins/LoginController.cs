@@ -1,7 +1,8 @@
 ﻿
+using APIControleFinanceiro.Models.Autenticacoes;
 using APIControleFinanceiro.Models.Logins;
 using APIControleFinanceiro.Models.Usuarios;
-using APIControleFinanceiro.Servicos.AutenticacaoServico;
+using APIControleFinanceiro.Servicos.Autenticacoes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,13 @@ namespace API.Controllers.Usuarios
     {
         private readonly ILoginServico _loginServico;
         private readonly IUsuarioServico _usuarioServico;
+        private readonly IRevogarTokensServico _revogarTokensServico;
 
-        public LoginController(ILoginServico loginServico, IUsuarioServico usuarioServico)
+        public LoginController(ILoginServico loginServico, IUsuarioServico usuarioServico, IRevogarTokensServico revogarTokensServico)
         {
             _loginServico = loginServico;
             _usuarioServico = usuarioServico;
+            _revogarTokensServico = revogarTokensServico;
         }
 
         [HttpPost()]
@@ -26,21 +29,13 @@ namespace API.Controllers.Usuarios
         {
             try
             {
-                var usuarioExiste = await _loginServico.VerificarUsuarioExiste(dados.EmailLogin);
+                var usuario = await _loginServico.VerificarCredenciaisUsuario(dados);
 
-                if (usuarioExiste.Habilitado)
-                    throw new Exception("Usuário já está logado.");
+                var token = AutenticacaoServico.GerarToken(usuario);
 
-                var senhaValida = await _loginServico.VerificarSenhaLogin(dados);
+                usuario.TokenAcesso = token;
 
-                if (!senhaValida)
-                    throw new Exception("Senha inválida");
-
-                var token = AutenticacaoServico.GerarToken(usuarioExiste);
-
-                usuarioExiste.TokenAcesso = token;
-                usuarioExiste.Habilitado = true;
-                await _usuarioServico.Atualizar(usuarioExiste);
+                await _usuarioServico.Atualizar(usuario);
 
                 return Ok(new
                 {
@@ -62,13 +57,12 @@ namespace API.Controllers.Usuarios
         [Authorize]
         [Route("/Logout/")]
         [ApiVersion("1.0")]
-        public async Task<IActionResult> Logout(string email)
+        public async Task<IActionResult> Logout(TokenRevogado tokenRevogado)
         {
             try
             {
-                var usuarioExiste = await _loginServico.VerificarUsuarioExiste(email);
-                usuarioExiste.Habilitado = false;
-                await _usuarioServico.Atualizar(usuarioExiste);
+                var usuarioExiste = await _loginServico.VerificarEmailLogout(tokenRevogado.Email);
+                _revogarTokensServico.RevogarTokens(tokenRevogado);
 
                 return Ok(new
                 {
@@ -80,39 +74,6 @@ namespace API.Controllers.Usuarios
                 return BadRequest(new
                 {
                     Message = "Erro ao desconectar o usuário",
-                    Error = ex.Message
-                });
-            }
-        }
-
-        [HttpGet()]
-        [Authorize]
-        [Route("/VerificarToken/")]
-        [ApiVersion("1.0")]
-        public async Task<IActionResult> VerificarToken(string token)
-        {
-            try
-            {
-                var tokenValido = AutenticacaoServico.TokenEhValido(token);
-                var usuarios = await _usuarioServico.ObterTodos();
-                var usuarioLogado = usuarios?.FirstOrDefault(u => u.TokenAcesso == token);
-                var usuarioHabilitado = tokenValido && usuarioLogado.Habilitado;
-
-
-                if (!usuarioHabilitado)
-                    throw new Exception("Token expirado ou usuário efetuou logout.");
-
-                return Ok(new
-                {
-                    PermissaoAcesso = usuarioHabilitado
-                });
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new
-                {
-                    Message = "Erro ao obter o token",
                     Error = ex.Message
                 });
             }

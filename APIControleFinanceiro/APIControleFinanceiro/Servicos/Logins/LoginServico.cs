@@ -11,7 +11,29 @@ namespace APIControleFinanceiro.Servicos.Logins
             _usuarioRepositorio = usuarioRepositorio;
         }
 
-        public async Task<Usuario> VerificarUsuarioExiste(string email)
+        public async Task<Usuario> VerificarCredenciaisUsuario(Login dados)
+        {
+            var usuario = await _usuarioRepositorio.GetUsuarioEmailAsync(dados.EmailLogin);
+
+            if (usuario == null)
+                throw new Exception("Não foi encontrado usuário correspondente ao e-mail, revise os dados");
+
+            var senhaValida = VerificarSenhaLogin(dados, usuario);
+
+            if (!senhaValida)
+                throw new Exception("Senha inválida");
+
+            return usuario;
+        }
+
+        private static bool VerificarSenhaLogin(Login Dados, Usuario usuario)
+        {
+            var senhaValida =  BCrypt.Net.BCrypt.Verify(Dados.SenhaLogin, usuario.Senha);
+
+            return senhaValida;
+        }
+
+        public async Task<Usuario> VerificarEmailLogout(string email)
         {
             var usuario = await _usuarioRepositorio.GetUsuarioEmailAsync(email);
 
@@ -21,12 +43,6 @@ namespace APIControleFinanceiro.Servicos.Logins
             return usuario;
         }
 
-        public async Task<bool> VerificarSenhaLogin(Login Dados)
-        {
-            var encontrarUsuario = await _usuarioRepositorio.GetUsuarioEmailAsync(Dados.EmailLogin);
-            var senhaValida =  BCrypt.Net.BCrypt.Verify(Dados.SenhaLogin, encontrarUsuario.Senha);
 
-            return senhaValida;
-        }
     }
 }

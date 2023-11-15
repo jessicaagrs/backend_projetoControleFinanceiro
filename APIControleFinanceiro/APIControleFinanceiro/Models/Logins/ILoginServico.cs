@@ -4,7 +4,7 @@ namespace APIControleFinanceiro.Models.Logins
 {
     public interface ILoginServico
     {
-        public Task<Usuario> VerificarUsuarioExiste(string email);
-        public Task<bool> VerificarSenhaLogin(Login dados);
+        public Task<Usuario> VerificarCredenciaisUsuario(Login dados);
+        public Task<Usuario> VerificarEmailLogout(string email);
     }
 }

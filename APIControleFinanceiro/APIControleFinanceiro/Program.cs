@@ -1,3 +1,4 @@
+using APIControleFinanceiro.Models.Autenticacoes;
 using APIControleFinanceiro.Models.CategoriasDespesas;
 using APIControleFinanceiro.Models.CategoriasReceitas;
 using APIControleFinanceiro.Models.Database;
@@ -5,12 +6,15 @@ using APIControleFinanceiro.Models.Despesas;
 using APIControleFinanceiro.Models.Logins;
 using APIControleFinanceiro.Models.Receitas;
 using APIControleFinanceiro.Models.Usuarios;
+using APIControleFinanceiro.Repositorios.Autenticacoes;
 using APIControleFinanceiro.Repositorios.CategoriasDespesas;
 using APIControleFinanceiro.Repositorios.CategoriasReceitas;
 using APIControleFinanceiro.Repositorios.Database;
 using APIControleFinanceiro.Repositorios.Despesas;
 using APIControleFinanceiro.Repositorios.Receitas;
 using APIControleFinanceiro.Repositorios.Usuarios;
+using APIControleFinanceiro.Servicos.Autenticacoes;
+using APIControleFinanceiro.Servicos.Autorizacoes;
 using APIControleFinanceiro.Servicos.Logins;
 using APIControleFinanceiro.Servicos.Receitas;
 using APIControleFinanceiro.Servicos.Swagger;
@@ -30,23 +34,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
 //servicos e repositorios
-builder.Services.AddScoped<MongoDBContext>();
-builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
-builder.Services.AddScoped<ICategoriaReceitaRepositorio, CategoriaReceitaRepositorio>();
-builder.Services.AddScoped<ICategoriaReceitaServico, CategoriaReceitaServico>();
+builder.Services.AddTransient<MongoDBContext>();
+builder.Services.AddTransient<IUsuarioServico, UsuarioServico>();
+builder.Services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
 
-builder.Services.AddScoped<ICategoriaDespesaRepositorio, CategoriaDespesaRepositorio>();
-builder.Services.AddScoped<ICategoriaDespesaServico, CategoriaDespesaServico>();
+builder.Services.AddTransient<ICategoriaReceitaRepositorio, CategoriaReceitaRepositorio>();
+builder.Services.AddTransient<ICategoriaReceitaServico, CategoriaReceitaServico>();
 
-builder.Services.AddScoped<IReceitaRepositorio, ReceitaRepositorio>();
-builder.Services.AddScoped<IReceitaServico, ReceitaServico>();
+builder.Services.AddTransient<ICategoriaDespesaRepositorio, CategoriaDespesaRepositorio>();
+builder.Services.AddTransient<ICategoriaDespesaServico, CategoriaDespesaServico>();
 
-builder.Services.AddScoped<IDespesaRepositorio, DespesaRepositorio>();
-builder.Services.AddScoped<IDespesaServico, DespesaServico>();
+builder.Services.AddTransient<IReceitaRepositorio, ReceitaRepositorio>();
+builder.Services.AddTransient<IReceitaServico, ReceitaServico>();
 
-builder.Services.AddScoped<ILoginServico, LoginServico>();
+builder.Services.AddTransient<IDespesaRepositorio, DespesaRepositorio>();
+builder.Services.AddTransient<IDespesaServico, DespesaServico>();
+
+builder.Services.AddTransient<ILoginServico, LoginServico>();
+
+builder.Services.AddTransient<IRevogarTokensRepositorio, RevogarTokensRepositorio>();
+builder.Services.AddTransient<IRevogarTokensServico, RevogarTokensServico>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidacao>();
 builder.Services.AddFluentValidationAutoValidation();
@@ -140,6 +148,12 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+//autorizacao
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(AutorizacaoFiltroServico));
+});
 
 var app = builder.Build();
 

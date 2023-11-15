@@ -1,12 +1,10 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using APIControleFinanceiro.Models.Usuarios;
-using Microsoft.Extensions.Configuration;
 
-namespace APIControleFinanceiro.Servicos.AutenticacaoServico
+namespace APIControleFinanceiro.Servicos.Autenticacoes
 {
     public static class AutenticacaoServico
     {
@@ -27,7 +25,7 @@ namespace APIControleFinanceiro.Servicos.AutenticacaoServico
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
-                    new Claim(ClaimTypes.Role, usuario.Id.ToString())
+                    new Claim(ClaimTypes.Role, usuario.Email.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(10),
 
@@ -37,32 +35,6 @@ namespace APIControleFinanceiro.Servicos.AutenticacaoServico
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
-        }
-
-        public static bool TokenEhValido(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-
-            try
-            {
-                tokenHandler.ValidateToken(token, validationParameters, out _);
-                return true;
-            }
-            catch (SecurityTokenExpiredException)
-            {
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
     }
 }

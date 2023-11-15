@@ -18,7 +18,7 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpGet()]
-        [Authorize]
+        [Authorize()]
         [ApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {

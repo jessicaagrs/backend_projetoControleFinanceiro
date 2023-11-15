@@ -1,4 +1,5 @@
-﻿using APIControleFinanceiro.Models.CategoriasDespesas;
+﻿using APIControleFinanceiro.Models.Autenticacoes;
+using APIControleFinanceiro.Models.CategoriasDespesas;
 using APIControleFinanceiro.Models.CategoriasReceitas;
 using APIControleFinanceiro.Models.Database;
 using APIControleFinanceiro.Models.Despesas;
@@ -26,5 +27,6 @@ namespace APIControleFinanceiro.Repositorios.Database
         public IMongoCollection<Despesa> Despesas => _database.GetCollection<Despesa>("despesas");
         public IMongoCollection<CategoriaDespesa> CategoriaDespesas => _database.GetCollection<CategoriaDespesa>("categoriasDespesas");
         public IMongoCollection<CategoriaReceita> CategoriaReceitas => _database.GetCollection<CategoriaReceita>("categoriasReceitas");
+        public IMongoCollection<TokenRevogado> TokensRevogados => _database.GetCollection<TokenRevogado>("tokensRevogados");
     }
 }
