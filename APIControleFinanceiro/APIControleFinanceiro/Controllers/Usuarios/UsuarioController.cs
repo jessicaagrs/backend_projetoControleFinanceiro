@@ -1,4 +1,5 @@
 ﻿
+using APIControleFinanceiro.Controllers.Models;
 using APIControleFinanceiro.Models.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace API.Controllers.Usuarios
     [Route("[controller]")]
     public class UsuariosController : ControllerBase
     {
-        private IUsuarioServico _usuarioServico;
+        private readonly IUsuarioServico _usuarioServico;
 
         public UsuariosController(IUsuarioServico usuarioServico)
         {
@@ -42,10 +43,19 @@ namespace API.Controllers.Usuarios
 
         [HttpPost()]
         [ApiVersion("1.0")]
-        public async Task<IActionResult> Post([FromBody] Usuario usuario)
+        public async Task<IActionResult> Post([FromForm] UsuarioControllerModel dadosRequisicao)
         {
             try
             {
+                var usuario = new Usuario
+                {
+                    Nome = dadosRequisicao.Nome,
+                    Email = dadosRequisicao.Email,
+                    Senha = dadosRequisicao.Senha,
+                };
+
+                usuario = _usuarioServico.SalvarFotoStorage(dadosRequisicao.Foto, usuario);
+
                 var novoUsuario = await _usuarioServico.Adicionar(usuario);
                 return Ok(novoUsuario);
             }
@@ -90,10 +100,19 @@ namespace API.Controllers.Usuarios
         [HttpPut()]
         [Authorize]
         [ApiVersion("1.0")]
-        public async Task<IActionResult> Put([FromBody] Usuario usuario)
+        public async Task<IActionResult> Put([FromForm] UsuarioControllerModel dadosRequisicao)
         {
             try
             {
+                if (string.IsNullOrEmpty(dadosRequisicao.Id))
+                    throw new Exception("Dados de usuário inválido, informar Id");
+
+                var usuario = await _usuarioServico.ObterPorId(dadosRequisicao.Id);
+                usuario.Nome = dadosRequisicao.Nome;
+                usuario.Email = dadosRequisicao.Email;
+                usuario.Senha = dadosRequisicao.Senha;
+                usuario = _usuarioServico.SalvarFotoStorage(dadosRequisicao.Foto, usuario);
+
                 var usuarioAtualizado = await _usuarioServico.Atualizar(usuario);
                 return Ok(usuarioAtualizado);
             }

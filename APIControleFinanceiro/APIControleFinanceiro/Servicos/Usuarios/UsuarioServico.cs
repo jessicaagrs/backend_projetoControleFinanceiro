@@ -1,4 +1,6 @@
-﻿using APIControleFinanceiro.Models.Usuarios;
+﻿using API.Controllers.Usuarios;
+using APIControleFinanceiro.Controllers.Models;
+using APIControleFinanceiro.Models.Usuarios;
 using System.Text.RegularExpressions;
 using static APIControleFinanceiro.Models.Database.DatabaseSettings;
 
@@ -16,6 +18,11 @@ namespace APIControleFinanceiro.Servicos.Usuarios
         public Task<List<Usuario>> ObterTodos()
         {
             return _usuarioRepositorio.GetUsuariosAsync();
+        }
+
+        public Task<Usuario> ObterPorId(string id)
+        {
+            return _usuarioRepositorio.GetUsuarioPorIdAsync(id);
         }
 
         public async Task<Usuario> Adicionar(Usuario usuario)
@@ -79,6 +86,32 @@ namespace APIControleFinanceiro.Servicos.Usuarios
             {
                 string senhaCriptografada = BCrypt.Net.BCrypt.HashPassword(usuario.Senha);
                 usuario.Senha = senhaCriptografada;
+            }
+
+            return usuario;
+        }
+
+        public Usuario SalvarFotoStorage(IFormFile foto, Usuario usuario)
+        {
+            if (foto != null)
+            {
+                string diretorioBase = Path.Combine("Storage", usuario.Email);
+                if (!Directory.Exists(diretorioBase))
+                {
+                    Directory.CreateDirectory(diretorioBase);
+                }
+                var caminhoArquivo = Path.Combine(diretorioBase, foto.FileName);
+
+                string extensaoArquivo = Path.GetExtension(caminhoArquivo.ToLower());
+
+                if (extensaoArquivo != ".png" || extensaoArquivo != ".jpeg" || extensaoArquivo != ".jpg")
+                    throw new Exception("Os formatos aceitos para foto são JPEG ou PNG.");
+
+                using Stream arquivoStream = new FileStream(caminhoArquivo, FileMode.Create);
+                foto.CopyTo(arquivoStream);
+
+                if(usuario.CaminhoFoto != caminhoArquivo)
+                    usuario.CaminhoFoto = caminhoArquivo;
             }
 
             return usuario;

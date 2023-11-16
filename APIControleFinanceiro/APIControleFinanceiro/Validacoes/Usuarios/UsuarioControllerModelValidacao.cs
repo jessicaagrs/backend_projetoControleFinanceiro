@@ -1,11 +1,11 @@
-﻿using APIControleFinanceiro.Models.Usuarios;
+﻿using APIControleFinanceiro.Controllers.Models;
 using FluentValidation;
 
 namespace APIControleFinanceiro.Validacoes.Usuarios
 {
-    public class UsuarioValidacao : AbstractValidator<Usuario>
+    public class UsuarioControllerModelValidacao : AbstractValidator<UsuarioControllerModel>
     {
-        public UsuarioValidacao()
+        public UsuarioControllerModelValidacao()
         {
             RuleFor(u => u.Nome)
                 .NotEmpty()

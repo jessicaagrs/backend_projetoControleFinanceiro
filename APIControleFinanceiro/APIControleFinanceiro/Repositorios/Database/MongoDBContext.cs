@@ -22,7 +22,6 @@ namespace APIControleFinanceiro.Repositorios.Database
         }
 
         public IMongoCollection<Usuario> Usuarios => _database.GetCollection<Usuario>("usuarios");
-        public IMongoCollection<IdentityRole> Roles => _database.GetCollection<IdentityRole>("roles");
         public IMongoCollection<Receita> Receitas => _database.GetCollection<Receita>("receitas");
         public IMongoCollection<Despesa> Despesas => _database.GetCollection<Despesa>("despesas");
         public IMongoCollection<CategoriaDespesa> CategoriaDespesas => _database.GetCollection<CategoriaDespesa>("categoriasDespesas");

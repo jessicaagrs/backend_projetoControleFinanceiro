@@ -33,8 +33,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 
-//servicos e repositorios
-
 builder.Services.AddTransient<MongoDBContext>();
 builder.Services.AddTransient<IUsuarioServico, UsuarioServico>();
 builder.Services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
@@ -65,7 +63,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddEndpointsApiExplorer();
 
-//versao
 builder.Services.AddApiVersioning(o =>
 {
     o.AssumeDefaultVersionWhenUnspecified = true;
@@ -114,20 +111,18 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
-//cors
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "MyPolicy",
+    options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
 });
 
-//autenticacao
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Key:MyKey").Value);
 
@@ -147,8 +142,6 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = false
     };
 });
-
-//autorizacao
 
 builder.Services.AddControllers(options =>
 {
@@ -177,7 +170,8 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseCors("MyPolicy");
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

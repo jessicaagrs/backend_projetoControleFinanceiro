@@ -18,6 +18,15 @@ namespace APIControleFinanceiro.Validacoes.Receitas
             RuleFor(r => r.Data)
                 .Must(data => data != DateTime.MinValue)
                 .WithMessage("A data da receita é obrigatória");
+
+            RuleFor(r => r.UsuarioId)
+                .NotEmpty()
+                .WithMessage("Necessário vincular usuário a receita");
+
+            RuleFor(r => r.CategoriaId)
+                .NotEmpty()
+                .WithMessage("Necessário vincular usuário a receita");
+
         }
     }
 }

@@ -16,6 +16,9 @@ namespace APIControleFinanceiro.Repositorios.Usuarios
         public async Task<List<Usuario>> GetUsuariosAsync() =>
             await _usuarioCollection.Find(x => true).ToListAsync();
 
+        public async Task<Usuario> GetUsuarioPorIdAsync(string id) =>
+            await _usuarioCollection.Find(x =>x.Id == id).FirstOrDefaultAsync();
+
         public async Task<Usuario> GetUsuarioEmailAsync(string email) =>
            await _usuarioCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
 

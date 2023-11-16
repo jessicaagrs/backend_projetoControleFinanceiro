@@ -13,6 +13,7 @@ namespace APIControleFinanceiro.Models.Usuarios
         public string Senha { get; set; } = string.Empty;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public string? TokenAcesso { get; set; } = string.Empty;
+        public string? CaminhoFoto { get; set; }
     }
 
 }

@@ -8,17 +8,16 @@ namespace APIControleFinanceiro.Servicos.Autenticacoes
 {
     public static class AutenticacaoServico
     {
-        static IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
-        static string? secretKey = configuration.GetSection("Key:MyKey").Value;
-        static byte[]? key = Encoding.ASCII.GetBytes(secretKey);
         public static string GerarToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+            var secretKey = configuration.GetSection("Key:MyKey").Value;
+            var key = Encoding.ASCII.GetBytes(secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
