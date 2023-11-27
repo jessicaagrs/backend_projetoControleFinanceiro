@@ -13,7 +13,11 @@ namespace APIControleFinanceiro.Models.Usuarios
         public string Senha { get; set; } = string.Empty;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public string? TokenAcesso { get; set; } = string.Empty;
-        public string? CaminhoFoto { get; set; }
+        public string? CaminhoFoto { get; set; } = string.Empty;
+        public string NumeroCartaoCredito {  get; set; } = string.Empty;
+        public DateTime ValidadeCartaoCredito { get; set; } = DateTime.MinValue;
+        public string BandeiraCartaoCredito { get; set; } = string.Empty;
+        public string BancoCartaoCredito { get; set; } = string.Empty;
     }
 
 }

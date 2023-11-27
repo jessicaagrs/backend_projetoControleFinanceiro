@@ -13,6 +13,9 @@ namespace APIControleFinanceiro.Repositorios.Receitas
             _receitaCollection = mongoDbContext.Receitas;
         }
 
+        public async Task<List<Receita>> GetReceitasPaginacaoAsync(int numeroPagina, int quantidadePorPagina) =>
+            await _receitaCollection.Find(x => true).Skip(numeroPagina * quantidadePorPagina).Limit(quantidadePorPagina).ToListAsync();
+
         public async Task<List<Receita>> GetReceitasAsync() =>
             await _receitaCollection.Find(x => true).ToListAsync();
 

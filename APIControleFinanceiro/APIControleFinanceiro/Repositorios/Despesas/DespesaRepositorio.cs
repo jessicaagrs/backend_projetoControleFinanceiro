@@ -13,21 +13,24 @@ namespace APIControleFinanceiro.Repositorios.Despesas
             _despesaCollection = mongoDbContext.Despesas;
         }
 
-        public async Task<List<Despesa>> GetReceitasAsync() =>
-            await _despesaCollection.Find(x => true).ToListAsync();
+        public async Task<List<Despesa>> GetDespesasPaginacaoAsync(int numeroPagina, int quantidadePorPagina) =>
+            await _despesaCollection.Find(x => true).Skip(numeroPagina * quantidadePorPagina).Limit(quantidadePorPagina).ToListAsync();
 
-        public async Task<Despesa> CreateReceitaAsync(Despesa despesa)
+        public async Task<List<Despesa>> GetDespesasAsync() =>
+           await _despesaCollection.Find(x => true).ToListAsync();
+
+        public async Task<Despesa> CreateDespesaAsync(Despesa despesa)
         {
             await _despesaCollection.InsertOneAsync(despesa);
 
             return despesa;
         }
-        public async Task DeleteReceitaAsync(string despesaId)
+        public async Task DeleteDespesaAsync(string despesaId)
         {
             await _despesaCollection.DeleteOneAsync(x => x.Id == despesaId);
         }
 
-        public async Task<Despesa> UpdateReceitaAsync(Despesa despesa)
+        public async Task<Despesa> UpdateDespesaAsync(Despesa despesa)
         {
             await _despesaCollection.ReplaceOneAsync(x => x.Id == despesa.Id, despesa);
             return despesa;

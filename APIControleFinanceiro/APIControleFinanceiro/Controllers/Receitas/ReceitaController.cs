@@ -18,11 +18,11 @@ namespace API.Controllers.Receitas
         [HttpGet()]
         [Authorize]
         [ApiVersion("1.0")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int numeroPagina, int quantidadePorPagina)
         {
             try
             {
-                var receitas = await _receitaServico.ObterTodos();
+                var receitas = await _receitaServico.ObterTodos(numeroPagina, quantidadePorPagina);
                 return Ok(receitas);
             }
             catch (Exception ex)

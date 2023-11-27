@@ -154,7 +154,7 @@ var versionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDesc
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/error");
+    app.UseExceptionHandler("/error-development");
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {

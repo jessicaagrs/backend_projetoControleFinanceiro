@@ -17,14 +17,13 @@ namespace API.Controllers.Despesas
         }
 
         [HttpGet()]
-        [Authorize]
         [ApiVersion("1.0")]
 
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int numeroPagina, int quantidadePorPagina)
         {
             try
             {
-                var despesas = await _despesaServico.ObterTodos();
+                var despesas = await _despesaServico.ObterTodos(numeroPagina, quantidadePorPagina);
                 return Ok(despesas);
             }
             catch (Exception ex)

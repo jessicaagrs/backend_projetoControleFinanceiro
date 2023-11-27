@@ -17,9 +17,9 @@ namespace APIControleFinanceiro.Servicos.Receitas
             _usuarioRepositorio = usuarioRepositorio;
         }
 
-        public Task<List<Receita>> ObterTodos()
+        public Task<List<Receita>> ObterTodos(int numeroPagina, int quantidadePorPagina)
         {
-            return _receitaRepositorio.GetReceitasAsync();
+            return _receitaRepositorio.GetReceitasPaginacaoAsync(numeroPagina, quantidadePorPagina);
         }
 
         public async Task<Receita> Adicionar(Receita receita)

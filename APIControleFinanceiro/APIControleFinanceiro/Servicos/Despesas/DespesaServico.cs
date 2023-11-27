@@ -17,9 +17,9 @@ namespace APIControleFinanceiro.Repositorios.Despesas
             _usuarioRepositorio = usuarioRepositorio;
         }
 
-        public Task<List<Despesa>> ObterTodos()
+        public Task<List<Despesa>> ObterTodos(int numeroPagina, int quantidadePorPagina)
         {
-            return _despesaRepositorio.GetReceitasAsync();
+            return _despesaRepositorio.GetDespesasPaginacaoAsync(numeroPagina, quantidadePorPagina);
         }
 
         public async Task<Despesa> Adicionar(Despesa despesa)
@@ -29,7 +29,7 @@ namespace APIControleFinanceiro.Repositorios.Despesas
 
             await VerificarCategoria(despesa.CategoriaId);
             await VerificarUsuario(despesa.UsuarioId);
-            return await _despesaRepositorio.CreateReceitaAsync(despesa);
+            return await _despesaRepositorio.CreateDespesaAsync(despesa);
         }
 
         public void Remover(string despesaId)
@@ -37,7 +37,7 @@ namespace APIControleFinanceiro.Repositorios.Despesas
             if (string.IsNullOrEmpty(despesaId))
                 throw new Exception("O Id da despesa é inválido");
 
-            _despesaRepositorio.DeleteReceitaAsync(despesaId);
+            _despesaRepositorio.DeleteDespesaAsync(despesaId);
         }
 
         public async Task<Despesa> Atualizar(Despesa despesa)
@@ -45,13 +45,13 @@ namespace APIControleFinanceiro.Repositorios.Despesas
             if (despesa == null)
                 throw new Exception("Dados inválidos.");
 
-            var despesas = await _despesaRepositorio.GetReceitasAsync();
+            var despesas = await _despesaRepositorio.GetDespesasAsync();
             var existeDespesa = despesas.FirstOrDefault(c => c.Id == despesa.Id);
 
             if (existeDespesa == null)
                 throw new Exception("A despesa informada não existe");
 
-            var atualizacao = await _despesaRepositorio.UpdateReceitaAsync(despesa);
+            var atualizacao = await _despesaRepositorio.UpdateDespesaAsync(despesa);
 
             return atualizacao;
         }
