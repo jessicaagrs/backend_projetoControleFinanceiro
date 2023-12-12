@@ -22,6 +22,25 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
             _revogarTokensServico = revogarTokensServico;
         }
 
+        // POST api/Login
+        /// <summary>
+        /// Efetua login na aplicação.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Login
+        ///     {
+        ///         "emailLogin": "string",
+        ///         "SnehaLogin": "string"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Mensagem de sucesso e token para autorização</returns>
+        /// <response code="200">Retorna mensagem e token</response>
+        /// <response code="400">Se houver erro no login</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [ApiVersion("1.0")]
         public async Task<IActionResult> Login([FromBody] Login dados)
@@ -52,6 +71,25 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
             }
         }
 
+        // POST api/Logout
+        /// <summary>
+        /// Efetua logout na aplicação.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Logout
+        ///     {
+        ///         "token": "string",
+        ///         "email": "string"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Mensagem de logout efetuado</returns>
+        /// <response code="200">Retorna mensagem de logout</response>
+        /// <response code="400">Se houver erro no logout</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [Authorize]
         [Route("/Logout/")]

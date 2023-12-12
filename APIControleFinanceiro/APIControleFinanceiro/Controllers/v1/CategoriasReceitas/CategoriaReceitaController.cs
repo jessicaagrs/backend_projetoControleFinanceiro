@@ -1,6 +1,8 @@
 ﻿using APIControleFinanceiro.Domain.Models.CategoriasReceitas;
+using APIControleFinanceiro.Domain.Models.Receitas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
 {
@@ -15,6 +17,15 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
             _categoriaReceitaServico = categoriaReceitaServico;
         }
 
+        // GET api/CategoriasReceitas
+        /// <summary>
+        /// Consulta categorias de receitas criadas.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Lista de categorias de receitas criadas.</returns>
+        /// <response code="200">Retorna lista dos itens</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpGet()]
         [Authorize]
         [ApiVersion("1.0")]
@@ -37,7 +48,24 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
             }
         }
 
-
+        // POST api/CategoriasReceitas
+        /// <summary>
+        /// Cria uma categoria de receita.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /CategoriasReceitas
+        ///     {
+        ///         "descricao": "string"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item criado</returns>
+        /// <response code="200">Retorna o novo item criado</response>
+        /// <response code="400">Se o item não for criado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [Authorize]
         [ApiVersion("1.0")]
@@ -45,6 +73,8 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
         {
             try
             {
+                var usuarioId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                categoriaReceita.UsuarioId = usuarioId;
                 var novaCategoria = await _categoriaReceitaServico.Adicionar(categoriaReceita);
                 return Ok(novaCategoria);
             }
@@ -60,6 +90,15 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
             }
         }
 
+        // DELETE api/CategoriasReceitas/{categoriaId}
+        /// <summary>
+        /// Excluir uma categoria de receita.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Id da categoria de receita excluída.</returns>
+        /// <response code="200">Retorna item excluído com sucesso</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpDelete()]
         [Authorize]
         [Route("/CategoriasReceitas/{categoriaId}")]
@@ -86,6 +125,25 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
             }
         }
 
+        // PUT api/CategoriasReceitas
+        /// <summary>
+        /// Atualiza uma categoria de receita.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /CategoriasReceitas
+        ///     {
+        ///         "id": "string",
+        ///         "descricao": "string"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item atualizado</returns>
+        /// <response code="200">Retorna o novo item atualizado</response>
+        /// <response code="400">Se o item não for atualizado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPut()]
         [Authorize]
         [ApiVersion("1.0")]

@@ -3,6 +3,7 @@ using APIControleFinanceiro.Domain.Models.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Security.Claims;
 
 namespace APIControleFinanceiro.Controllers.v1.Usuarios
 {
@@ -17,6 +18,15 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
             _usuarioServico = usuarioServico;
         }
 
+        // GET api/Usuarios
+        /// <summary>
+        /// Consulta usuários cadastrados.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Lista de usuários cadastrados.</returns>
+        /// <response code="200">Retorna lista dos itens</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpGet()]
         [Authorize()]
         [ApiVersion("1.0")]
@@ -39,7 +49,30 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
             }
         }
 
-
+        // POST api/Usuarios
+        /// <summary>
+        /// Cria um usuário.
+        /// </summary>
+        /// <remarks>
+        /// Preencher campos:
+        ///
+        ///     POST /Usuarios
+        ///     
+        ///     Nome: string
+        ///     Email: string
+        ///     Senha: string
+        ///     Foto: png ou jpeg
+        ///     Numero Cartão: inteiro com 16 dígitos
+        ///     Validade Cartão: 01/01/2000 (sempre usar dia 01)
+        ///     Bandeira: string
+        ///     Banco: string
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item criado</returns>
+        /// <response code="200">Retorna o novo item criado</response>
+        /// <response code="400">Se o item não for criado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [ApiVersion("1.0")]
         public async Task<IActionResult> Post([FromForm] UsuarioControllerModel dadosRequisicao)
@@ -51,6 +84,10 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
                     Nome = dadosRequisicao.Nome,
                     Email = dadosRequisicao.Email,
                     Senha = dadosRequisicao.Senha,
+                    NumeroCartaoCredito = dadosRequisicao.NumeroCartaoCredito,
+                    ValidadeCartaoCredito = dadosRequisicao.ValidadeCartaoCredito,
+                    BandeiraCartaoCredito = dadosRequisicao.BandeiraCartaoCredito,
+                    BancoCartaoCredito = dadosRequisicao.BancoCartaoCredito
                 };
 
                 usuario = _usuarioServico.SalvarFotoStorage(dadosRequisicao.Foto, usuario);
@@ -70,6 +107,15 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
             }
         }
 
+        // DELETE api/Usuarios/{usuarioId}
+        /// <summary>
+        /// Excluir um usuário.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Id do usuário excluído.</returns>
+        /// <response code="200">Retorna item excluído com sucesso</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpDelete()]
         [Authorize]
         [Route("/Usuarios/{usuarioId}")]
@@ -96,6 +142,31 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
             }
         }
 
+        // PUT api/Usuarios
+        /// <summary>
+        /// Atualiza um usuário.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Usuarios
+        ///     
+        ///     Id: string
+        ///     Nome: string
+        ///     Email: string
+        ///     Senha: string
+        ///     Foto: png ou jpeg
+        ///     Numero Cartão: inteiro com 16 dígitos
+        ///     Validade Cartão: 01/01/2000 (sempre usar dia 01)
+        ///     Bandeira: string
+        ///     Banco: string
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item atualizado</returns>
+        /// <response code="200">Retorna o novo item atualizado</response>
+        /// <response code="400">Se o item não for atualizado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPut()]
         [Authorize]
         [ApiVersion("1.0")]

@@ -14,6 +14,23 @@ namespace APIControleFinanceiro.Controllers.v1.Storage
             _usuarioServico = usuarioServico;
         }
 
+        // POST api/DownloadFotoUsuario/{idUsuario}
+        /// <summary>
+        /// Download da foto de usuário.
+        /// </summary>
+        /// <remarks>
+        /// Preencher campo:
+        ///
+        ///     POST /DownloadFotoUsuario/{idUsuario}
+        ///     
+        ///     Id do usuário: string
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>A foto cadastrada pelo usuário</returns>
+        /// <response code="200">Retorna a foto</response>
+        /// <response code="400">Se a foto não puder ser obtida</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [Authorize]
         [Route("/DownloadFotoUsuario/{idUsuario}")]

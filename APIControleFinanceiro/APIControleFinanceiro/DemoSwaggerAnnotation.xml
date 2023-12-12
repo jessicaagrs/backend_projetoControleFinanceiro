@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APIControleFinanceiro</name>
+    </assembly>
+    <members>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasDespesas.CategoriasDespesasController.Get">
+            <summary>
+            Consulta categorias de despesas criadas.
+            </summary>
+            <param name="value"></param>
+            <returns>Lista de categorias de despesas criadas.</returns>
+            <response code="200">Retorna lista dos itens</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasDespesas.CategoriasDespesasController.Post(APIControleFinanceiro.Domain.Models.CategoriasDespesas.CategoriaDespesa)">
+             <summary>
+             Cria uma categoria de despesa.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasDespesas
+                 {
+                     "descricao": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="200">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasDespesas.CategoriasDespesasController.Delete(System.String)">
+            <summary>
+            Excluir uma categoria de despesa.
+            </summary>
+            <param name="value"></param>
+            <returns>Id da categoria de despesa excluída.</returns>
+            <response code="200">Retorna item excluído com sucesso</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasDespesas.CategoriasDespesasController.Put(APIControleFinanceiro.Domain.Models.CategoriasDespesas.CategoriaDespesa)">
+             <summary>
+             Atualiza uma categoria de despesa.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasDespesas
+                 {
+                     "id": "string",
+                     "descricao": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item atualizado</returns>
+             <response code="200">Retorna o novo item atualizado</response>
+             <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.Get">
+            <summary>
+            Consulta categorias de receitas criadas.
+            </summary>
+            <param name="value"></param>
+            <returns>Lista de categorias de receitas criadas.</returns>
+            <response code="200">Retorna lista dos itens</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.Post(APIControleFinanceiro.Domain.Models.CategoriasReceitas.CategoriaReceita)">
+             <summary>
+             Cria uma categoria de receita.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasReceitas
+                 {
+                     "descricao": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="200">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.Delete(System.String)">
+            <summary>
+            Excluir uma categoria de receita.
+            </summary>
+            <param name="value"></param>
+            <returns>Id da categoria de receita excluída.</returns>
+            <response code="200">Retorna item excluído com sucesso</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.Put(APIControleFinanceiro.Domain.Models.CategoriasReceitas.CategoriaReceita)">
+             <summary>
+             Atualiza uma categoria de receita.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasReceitas
+                 {
+                     "id": "string",
+                     "descricao": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item atualizado</returns>
+             <response code="200">Retorna o novo item atualizado</response>
+             <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.Get(System.Int32,System.Int32)">
+            <summary>
+            Consulta despesas criadas.
+            </summary>
+            <param name="value"></param>
+            <returns>Lista de despesas criadas.</returns>
+            <response code="200">Retorna lista dos itens</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.Post(APIControleFinanceiro.Domain.Models.Despesas.Despesa)">
+             <summary>
+             Cria uma despesa.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Despesa
+                 {
+                     "descricao": "string",
+                     "valor": 0,
+                     "categoriaId": "string"
+                     "data": "2023-12-12T14:02:55.118Z"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="200">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.Delete(System.String)">
+            <summary>
+            Excluir uma despesa.
+            </summary>
+            <param name="value"></param>
+            <returns>Id da despesa excluída.</returns>
+            <response code="200">Retorna item excluído com sucesso</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.Put(APIControleFinanceiro.Domain.Models.Despesas.Despesa)">
+             <summary>
+             Atualiza uma despesa.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Despesa
+                 {
+                     "id": "string",
+                     "descricao": "string",
+                     "valor": 0,
+                     "categoriaId": "string"
+                     "data": "2023-12-12T14:02:55.118Z"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item atualizado</returns>
+             <response code="200">Retorna o novo item atualizado</response>
+             <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Logins.LoginController.Login(APIControleFinanceiro.Domain.Models.Logins.Login)">
+             <summary>
+             Efetua login na aplicação.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Login
+                 {
+                     "emailLogin": "string",
+                     "SnehaLogin": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Mensagem de sucesso e token para autorização</returns>
+             <response code="200">Retorna mensagem e token</response>
+             <response code="400">Se houver erro no login</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Logins.LoginController.Logout(APIControleFinanceiro.Domain.Models.Autenticacoes.TokenRevogado)">
+             <summary>
+             Efetua logout na aplicação.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Logout
+                 {
+                     "token": "string",
+                     "email": "string"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Mensagem de logout efetuado</returns>
+             <response code="200">Retorna mensagem de logout</response>
+             <response code="400">Se houver erro no logout</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Receitas.ReceitasController.Get(System.Int32,System.Int32)">
+            <summary>
+            Consulta receitas criadas.
+            </summary>
+            <param name="value"></param>
+            <returns>Lista de receitas criadas.</returns>
+            <response code="200">Retorna lista dos itens</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Receitas.ReceitasController.Post(APIControleFinanceiro.Domain.Models.Receitas.Receita)">
+             <summary>
+             Cria uma receita.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Receita
+                 {
+                     "descricao": "string",
+                     "valor": 0,
+                     "categoriaId": "string"
+                     "data": "2023-12-12T14:02:55.118Z"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="200">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Receitas.ReceitasController.Delete(System.String)">
+            <summary>
+            Excluir uma receita.
+            </summary>
+            <param name="value"></param>
+            <returns>Id da receita excluída.</returns>
+            <response code="200">Retorna item excluído com sucesso</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Receitas.ReceitasController.Put(APIControleFinanceiro.Domain.Models.Receitas.Receita)">
+             <summary>
+             Atualiza uma receita.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Receita
+                 {
+                     "id": "string",
+                     "descricao": "string",
+                     "valor": 0,
+                     "categoriaId": "string"
+                     "data": "2023-12-12T14:02:55.118Z"
+                 }
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item atualizado</returns>
+             <response code="200">Retorna o novo item atualizado</response>
+             <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Storage.DownloadController.Post(System.String)">
+             <summary>
+             Download da foto de usuário.
+             </summary>
+             <remarks>
+             Preencher campo:
+            
+                 POST /DownloadFotoUsuario/{idUsuario}
+                 
+                 Id do usuário: string
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>A foto cadastrada pelo usuário</returns>
+             <response code="200">Retorna a foto</response>
+             <response code="400">Se a foto não puder ser obtida</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Get">
+            <summary>
+            Consulta usuários cadastrados.
+            </summary>
+            <param name="value"></param>
+            <returns>Lista de usuários cadastrados.</returns>
+            <response code="200">Retorna lista dos itens</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Post(APIControleFinanceiro.Controllers.v1.Models.UsuarioControllerModel)">
+             <summary>
+             Cria um usuário.
+             </summary>
+             <remarks>
+             Preencher campos:
+            
+                 POST /Usuarios
+                 
+                 Nome: string
+                 Email: string
+                 Senha: string
+                 Foto: png ou jpeg
+                 Numero Cartão: inteiro com 16 dígitos
+                 Validade Cartão: 01/01/2000 (sempre usar dia 01)
+                 Bandeira: string
+                 Banco: string
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item criado</returns>
+             <response code="200">Retorna o novo item criado</response>
+             <response code="400">Se o item não for criado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Delete(System.String)">
+            <summary>
+            Excluir um usuário.
+            </summary>
+            <param name="value"></param>
+            <returns>Id do usuário excluído.</returns>
+            <response code="200">Retorna item excluído com sucesso</response>
+            <response code="400">Se houver erro</response>
+            <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Put(APIControleFinanceiro.Controllers.v1.Models.UsuarioControllerModel)">
+             <summary>
+             Atualiza um usuário.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Usuarios
+                 
+                 Id: string
+                 Nome: string
+                 Email: string
+                 Senha: string
+                 Foto: png ou jpeg
+                 Numero Cartão: inteiro com 16 dígitos
+                 Validade Cartão: 01/01/2000 (sempre usar dia 01)
+                 Bandeira: string
+                 Banco: string
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Um novo item atualizado</returns>
+             <response code="200">Retorna o novo item atualizado</response>
+             <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+    </members>
+</doc>

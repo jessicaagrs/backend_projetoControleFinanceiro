@@ -104,7 +104,7 @@ namespace APIControleFinanceiro.Application.Servicos.Usuarios
 
                 string extensaoArquivo = Path.GetExtension(caminhoArquivo.ToLower());
 
-                if (extensaoArquivo != ".png" || extensaoArquivo != ".jpeg" || extensaoArquivo != ".jpg")
+                if (extensaoArquivo != ".png" && extensaoArquivo != ".jpeg" && extensaoArquivo != ".jpg")
                     throw new Exception("Os formatos aceitos para foto são JPEG ou PNG.");
 
                 using Stream arquivoStream = new FileStream(caminhoArquivo, FileMode.Create);

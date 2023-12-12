@@ -1,6 +1,7 @@
 ﻿using APIControleFinanceiro.Domain.Models.Receitas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace APIControleFinanceiro.Controllers.v1.Receitas
 {
@@ -15,6 +16,15 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
             _receitaServico = receitaServico;
         }
 
+        // GET api/Receita
+        /// <summary>
+        /// Consulta receitas criadas.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Lista de receitas criadas.</returns>
+        /// <response code="200">Retorna lista dos itens</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpGet()]
         [Authorize]
         [ApiVersion("1.0")]
@@ -37,7 +47,27 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
             }
         }
 
-
+        // POST api/Receita
+        /// <summary>
+        /// Cria uma receita.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Receita
+        ///     {
+        ///         "descricao": "string",
+        ///         "valor": 0,
+        ///         "categoriaId": "string"
+        ///         "data": "2023-12-12T14:02:55.118Z"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item criado</returns>
+        /// <response code="200">Retorna o novo item criado</response>
+        /// <response code="400">Se o item não for criado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [Authorize]
         [ApiVersion("1.0")]
@@ -45,6 +75,8 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
         {
             try
             {
+                var usuarioId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                receita.UsuarioId = usuarioId;
                 var novaReceita = await _receitaServico.Adicionar(receita);
                 return Ok(novaReceita);
             }
@@ -60,6 +92,15 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
             }
         }
 
+        // DELETE api/Receita/{receitaId}
+        /// <summary>
+        /// Excluir uma receita.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Id da receita excluída.</returns>
+        /// <response code="200">Retorna item excluído com sucesso</response>
+        /// <response code="400">Se houver erro</response>
+        /// <response code="401">Não autorizado</response>
         [HttpDelete()]
         [Authorize]
         [Route("/Receitas/{receitaId}")]
@@ -86,6 +127,28 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
             }
         }
 
+        // PUT api/Receita
+        /// <summary>
+        /// Atualiza uma receita.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Receita
+        ///     {
+        ///         "id": "string",
+        ///         "descricao": "string",
+        ///         "valor": 0,
+        ///         "categoriaId": "string"
+        ///         "data": "2023-12-12T14:02:55.118Z"
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Um novo item atualizado</returns>
+        /// <response code="200">Retorna o novo item atualizado</response>
+        /// <response code="400">Se o item não for atualizado</response>
+        /// <response code="401">Não autorizado</response>
         [HttpPut()]
         [Authorize]
         [ApiVersion("1.0")]

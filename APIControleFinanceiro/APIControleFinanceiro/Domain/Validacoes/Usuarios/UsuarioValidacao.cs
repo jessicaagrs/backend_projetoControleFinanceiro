@@ -23,15 +23,16 @@ namespace APIControleFinanceiro.Domain.Validacoes.Usuarios
                 .NotEmpty()
                 .Length(16).WithMessage("O número do cartão de crédito deve conter 16 dígitos");
 
-            RuleFor(r => r.ValidadeCartaoCredito)
+            RuleFor(u => u.ValidadeCartaoCredito)
                 .NotEmpty()
+                .Must(data => data != DateTime.MinValue)
                 .WithMessage("Informe uma data para validade do cartão de crédito");
 
-            RuleFor(r => r.BandeiraCartaoCredito)
+            RuleFor(u => u.BandeiraCartaoCredito)
                 .NotEmpty()
                 .WithMessage("Informe uma bandeira válida para Cartão de Crédito");
 
-            RuleFor(r => r.BancoCartaoCredito)
+            RuleFor(u => u.BancoCartaoCredito)
                 .NotEmpty()
                 .WithMessage("Informe um banco válido para Cartão de Crédito");
         }

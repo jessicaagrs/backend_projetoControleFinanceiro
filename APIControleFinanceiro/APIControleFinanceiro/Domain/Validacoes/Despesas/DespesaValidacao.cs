@@ -19,10 +19,6 @@ namespace APIControleFinanceiro.Domain.Validacoes.Despesas
                 .Must(data => data != DateTime.MinValue)
                 .WithMessage("A data da despesa é obrigatória");
 
-            RuleFor(d => d.UsuarioId)
-                .NotEmpty()
-                .WithMessage("Necessário vincular usuário a despesa");
-
             RuleFor(d => d.CategoriaId)
                 .NotEmpty()
                 .WithMessage("Necessário vincular usuário a despesa");

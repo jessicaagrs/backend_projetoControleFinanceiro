@@ -18,6 +18,23 @@ namespace APIControleFinanceiro.Domain.Validacoes.Usuarios
             RuleFor(u => u.Senha)
                 .NotEmpty()
                 .Length(5, 10).WithMessage("A senha deve conter de 5 a 10 caracteres");
+
+            RuleFor(u => u.NumeroCartaoCredito)
+                .NotEmpty()
+                .Length(16).WithMessage("O número do cartão de crédito deve conter 16 dígitos");
+
+            RuleFor(u => u.ValidadeCartaoCredito)
+                .NotEmpty()
+                .Must(data => data != DateTime.MinValue)
+                .WithMessage("Informe uma data para validade do cartão de crédito");
+
+            RuleFor(u => u.BandeiraCartaoCredito)
+                .NotEmpty()
+                .WithMessage("Informe uma bandeira válida para Cartão de Crédito");
+
+            RuleFor(u => u.BancoCartaoCredito)
+                .NotEmpty()
+                .WithMessage("Informe um banco válido para Cartão de Crédito");
         }
     }
 }

@@ -30,6 +30,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.Swagger;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,7 +83,19 @@ builder.Services.AddVersionedApiExplorer(setup =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.OperationFilter<SwaggerDefaultValues>();
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Documentação",
+        Description = "Controle Financeiro",
+        Contact = new OpenApiContact() { Name = "Jessica", Email = "jessicaag.rs@gmail.com" },
+        License = new OpenApiLicense()
+        {
+            Name = "JES Licence",
+            Url = new Uri("https://github.com/jessicaagrs/backend_projetoControleFinanceiro")
+        }
+    });
+
+    c.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "DemoSwaggerAnnotation.xml"));
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -113,7 +127,6 @@ builder.Services.AddSwaggerGen(c =>
 
 
 });
-
 
 builder.Services.AddCors(options =>
 {
