@@ -1,4 +1,5 @@
-﻿using APIControleFinanceiro.Domain.Models.CategoriasDespesas;
+﻿using APIControleFinanceiro.Application.Helper;
+using APIControleFinanceiro.Domain.Models.CategoriasDespesas;
 
 namespace APIControleFinanceiro.Application.Servicos.CategoriasDespesas
 {
@@ -48,5 +49,17 @@ namespace APIControleFinanceiro.Application.Servicos.CategoriasDespesas
             return atualizacao;
         }
 
+        public async Task<int> AdicionarLista(IFormFile file)
+        {
+            if (file == null)
+                throw new Exception("Selecione um arquivo excel para importar os dados.");
+
+            var excel = new ExcelHelper<CategoriaDespesa>(file);
+            var categorias = excel.GetValues();
+
+            var qtdItens = await _categoriaDespesaRepositorio.CreateListCategoriasDespesasAsync(categorias);
+
+            return qtdItens;
+        }
     }
 }

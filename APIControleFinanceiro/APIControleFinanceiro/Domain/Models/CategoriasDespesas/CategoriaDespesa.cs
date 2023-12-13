@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using System.Text.Json.Serialization;
 
 namespace APIControleFinanceiro.Domain.Models.CategoriasDespesas
 {

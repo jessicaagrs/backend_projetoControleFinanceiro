@@ -63,6 +63,24 @@
              <response code="400">Se o item não for atualizado</response>
              <response code="401">Não autorizado</response>
         </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasDespesas.CategoriasDespesasController.PostCsv(Microsoft.AspNetCore.Http.IFormFile)">
+             <summary>
+             Importação em lote de categorias de despesa.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasDespesas/Csv
+                 
+                 Arquivo formato .csv
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Novos itens criados.</returns>
+             <response code="200">Retorna a quantidade de itens adicionados</response>
+             <response code="400">Se houver erro na importação</response>
+             <response code="401">Não autorizado</response>
+        </member>
         <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.Get">
             <summary>
             Consulta categorias de receitas criadas.

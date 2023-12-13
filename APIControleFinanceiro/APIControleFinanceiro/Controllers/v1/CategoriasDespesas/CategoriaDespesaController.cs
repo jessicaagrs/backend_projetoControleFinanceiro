@@ -165,5 +165,45 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasDespesas
                 return BadRequest(errorResponse);
             }
         }
+
+        // POST api/CategoriasDespesas/Csv
+        /// <summary>
+        /// Importação em lote de categorias de despesa.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /CategoriasDespesas/Csv
+        ///     
+        ///     Arquivo formato .csv
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Novos itens criados.</returns>
+        /// <response code="200">Retorna a quantidade de itens adicionados</response>
+        /// <response code="400">Se houver erro na importação</response>
+        /// <response code="401">Não autorizado</response>
+        [HttpPost()]
+        [Authorize]
+        [Route("/CategoriasDespesas/Csv")]
+        [ApiVersion("1.0")]
+        public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
+        {
+            try
+            {
+                var resultado = await _categoriaDespesaServico.AdicionarLista(arquivoCsv);
+                return Ok($"Total de {resultado} categorias adicionadas");
+            }
+            catch (Exception ex)
+            {   
+                var errorResponse = new
+                {
+                    Message = "Erro ao importar categorias de despesa",
+                    Error = ex.Message
+                };
+
+                return BadRequest(errorResponse);
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ using APIControleFinanceiro.Application.Servicos.CategoriasReceitas;
 using APIControleFinanceiro.Application.Servicos.Despesas;
 using APIControleFinanceiro.Application.Servicos.Logins;
 using APIControleFinanceiro.Application.Servicos.Receitas;
-using APIControleFinanceiro.Application.Servicos.Swagger;
 using APIControleFinanceiro.Application.Servicos.Usuarios;
 using APIControleFinanceiro.Domain.Models.Autenticacoes;
 using APIControleFinanceiro.Domain.Models.CategoriasDespesas;
@@ -30,8 +29,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.Swagger;
-using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,8 +82,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Documentação",
-        Description = "Controle Financeiro",
+        Title = "Documentação APIControleFinanceiro",
+        Description = "Rotas da aplicação",
         Contact = new OpenApiContact() { Name = "Jessica", Email = "jessicaag.rs@gmail.com" },
         License = new OpenApiLicense()
         {

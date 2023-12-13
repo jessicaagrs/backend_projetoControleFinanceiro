@@ -2,8 +2,6 @@
 using APIControleFinanceiro.Domain.Models.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Security.Claims;
 
 namespace APIControleFinanceiro.Controllers.v1.Usuarios
 {

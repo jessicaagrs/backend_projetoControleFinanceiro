@@ -6,5 +6,6 @@
         public Task<CategoriaDespesa> Adicionar(CategoriaDespesa categoriaDespesa);
         public void Remover(string categoriaDespesaId);
         public Task<CategoriaDespesa> Atualizar(CategoriaDespesa categoriaDespesa);
+        public Task<int> AdicionarLista(IFormFile file);
     }
 }

@@ -6,5 +6,6 @@
         public Task<CategoriaDespesa> CreateCategoriaDespesaAsync(CategoriaDespesa categoriaDespesa);
         public Task DeleteCategoriaDespesaAsync(string categoriaDespesaId);
         public Task<CategoriaDespesa> UpdateCategoriaDespesaAsync(CategoriaDespesa categoriaDespesa);
+        public Task<int> CreateListCategoriasDespesasAsync(List<CategoriaDespesa> categoriaDespesas);
     }
 }

@@ -33,5 +33,11 @@ namespace APIControleFinanceiro.Infra.Repositorios.CategoriasDespesas
             return categoriaDespesa;
         }
 
+        public async Task<int> CreateListCategoriasDespesasAsync(List<CategoriaDespesa> categoriaDespesas)
+        {
+            await _categoriaDespesaCollection.InsertManyAsync(categoriaDespesas);
+
+            return categoriaDespesas.Count();
+        }
     }
 }
