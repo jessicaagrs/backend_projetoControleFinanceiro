@@ -1,5 +1,4 @@
-﻿
-namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
+﻿namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
 {
     public interface ICategoriaReceitaRepositorio
     {
@@ -7,5 +6,6 @@ namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
         public Task<CategoriaReceita> CreateCategoriaReceitaAsync(CategoriaReceita categoriaReceita);
         public Task DeleteCategoriaReceitaAsync(string categoriaReceitaId);
         public Task<CategoriaReceita> UpdateCategoriaReceitaAsync(CategoriaReceita categoriaReceita);
+        public Task<int> CreateListCategoriasReceitasAsync(List<CategoriaReceita> categoriaReceitas);
     }
 }

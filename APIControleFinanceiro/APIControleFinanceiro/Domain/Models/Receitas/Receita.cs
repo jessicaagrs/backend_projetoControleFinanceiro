@@ -18,6 +18,5 @@ namespace APIControleFinanceiro.Domain.Models.Receitas
         public string CategoriaId { get; set; } = string.Empty;
         public DateTime DataCriacao { get; set; } = DateTime.Now;
         public DateTime Data { get; set; } = DateTime.MinValue;
-        
     }
 }

@@ -1,5 +1,4 @@
 ﻿using APIControleFinanceiro.Domain.Models.CategoriasDespesas;
-using APIControleFinanceiro.Domain.Models.Receitas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -166,14 +165,14 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasDespesas
             }
         }
 
-        // POST api/CategoriasDespesas/Csv
+        // POST api/CategoriasDespesas/Importar
         /// <summary>
         /// Importação em lote de categorias de despesa.
         /// </summary>
         /// <remarks>
         /// Exemplo:
         ///
-        ///     POST /CategoriasDespesas/Csv
+        ///     POST /CategoriasDespesas/Importar
         ///     
         ///     Arquivo formato .csv
         ///
@@ -185,7 +184,7 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasDespesas
         /// <response code="401">Não autorizado</response>
         [HttpPost()]
         [Authorize]
-        [Route("/CategoriasDespesas/Csv")]
+        [Route("/CategoriasDespesas/Importar")]
         [ApiVersion("1.0")]
         public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
         {

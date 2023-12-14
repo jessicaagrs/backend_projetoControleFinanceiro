@@ -1,5 +1,4 @@
-﻿
-namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
+﻿namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
 {
     public interface ICategoriaReceitaServico
     {
@@ -7,5 +6,6 @@ namespace APIControleFinanceiro.Domain.Models.CategoriasReceitas
         public Task<CategoriaReceita> Adicionar(CategoriaReceita categoriaReceita);
         public void Remover(string categoriaReceitaId);
         public Task<CategoriaReceita> Atualizar(CategoriaReceita categoriaReceita);
+        public Task<int> AdicionarLista(IFormFile file);
     }
 }

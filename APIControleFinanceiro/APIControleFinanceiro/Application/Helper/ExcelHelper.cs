@@ -60,7 +60,38 @@ namespace APIControleFinanceiro.Application.Helper
             {
                 if (row.Table.Columns.Contains(property.Name))
                 {
-                    property.SetValue(item, row[property.Name] == DBNull.Value ? null : row[property.Name]);
+                    object value = row[property.Name];
+
+                    if (value != DBNull.Value)
+                    {
+                        if (property.PropertyType == typeof(decimal))
+                        {
+                            property.SetValue(item, Convert.ToDecimal(value));
+                        }
+                        else if (property.PropertyType == typeof(DateTime))
+                        {
+                            property.SetValue(item, Convert.ToDateTime(value));
+                        }
+                        else
+                        {
+                            property.SetValue(item, value);
+                        }
+                    }
+                    else
+                    {
+                        if (!property.PropertyType.IsValueType || Nullable.GetUnderlyingType(property.PropertyType) != null)
+                        {
+                            property.SetValue(item, null);
+                        }
+                        else if (property.PropertyType == typeof(DateTime))
+                        {
+                            property.SetValue(item, DateTime.MinValue);
+                        }
+                        else
+                        {
+                            property.SetValue(item, Convert.ChangeType(0.0, property.PropertyType));
+                        }
+                    }
                 }
             }
 

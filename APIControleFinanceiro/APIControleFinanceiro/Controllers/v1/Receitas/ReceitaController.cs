@@ -170,5 +170,45 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
                 return BadRequest(errorResponse);
             }
         }
+
+        // POST api/Receitas/Importar
+        /// <summary>
+        /// Importação em lote de receitas.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Receitas/Importar
+        ///     
+        ///     Arquivo formato .csv
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Novos itens criados.</returns>
+        /// <response code="200">Retorna a quantidade de itens adicionados</response>
+        /// <response code="400">Se houver erro na importação</response>
+        /// <response code="401">Não autorizado</response>
+        [HttpPost()]
+        //[Authorize]
+        [Route("/Receitas/Importar")]
+        [ApiVersion("1.0")]
+        public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
+        {
+            try
+            {
+                var resultado = await _receitaServico.AdicionarLista(arquivoCsv);
+                return Ok($"Total de {resultado} receitas adicionadas");
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    Message = "Erro ao importar receitas",
+                    Error = ex.Message
+                };
+
+                return BadRequest(errorResponse);
+            }
+        }
     }
 }

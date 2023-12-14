@@ -1,5 +1,4 @@
-﻿
-namespace APIControleFinanceiro.Domain.Models.Despesas
+﻿namespace APIControleFinanceiro.Domain.Models.Despesas
 {
     public interface IDespesaRepositorio
     {
@@ -8,5 +7,6 @@ namespace APIControleFinanceiro.Domain.Models.Despesas
         public Task<Despesa> CreateDespesaAsync(Despesa receita);
         public Task DeleteDespesaAsync(string receitaId);
         public Task<Despesa> UpdateDespesaAsync(Despesa receita);
+        public Task<int> CreateListDespesasAsync(List<Despesa> despesas);
     }
 }

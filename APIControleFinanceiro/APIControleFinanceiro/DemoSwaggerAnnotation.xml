@@ -70,7 +70,7 @@
              <remarks>
              Exemplo:
             
-                 POST /CategoriasDespesas/Csv
+                 POST /CategoriasDespesas/Importar
                  
                  Arquivo formato .csv
             
@@ -140,6 +140,24 @@
              <response code="400">Se o item não for atualizado</response>
              <response code="401">Não autorizado</response>
         </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.CategoriasReceitas.CategoriasReceitasController.PostCsv(Microsoft.AspNetCore.Http.IFormFile)">
+             <summary>
+             Importação em lote de categorias de receita.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /CategoriasReceitas/Importar
+                 
+                 Arquivo formato .csv
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Novos itens criados.</returns>
+             <response code="200">Retorna a quantidade de itens adicionados</response>
+             <response code="400">Se houver erro na importação</response>
+             <response code="401">Não autorizado</response>
+        </member>
         <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.Get(System.Int32,System.Int32)">
             <summary>
             Consulta despesas criadas.
@@ -203,6 +221,24 @@
              <returns>Um novo item atualizado</returns>
              <response code="200">Retorna o novo item atualizado</response>
              <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Despesas.DespesasController.PostCsv(Microsoft.AspNetCore.Http.IFormFile)">
+             <summary>
+             Importação em lote de despesas.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Despesas/Importar
+                 
+                 Arquivo formato .csv
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Novos itens criados.</returns>
+             <response code="200">Retorna a quantidade de itens adicionados</response>
+             <response code="400">Se houver erro na importação</response>
              <response code="401">Não autorizado</response>
         </member>
         <member name="M:APIControleFinanceiro.Controllers.v1.Logins.LoginController.Login(APIControleFinanceiro.Domain.Models.Logins.Login)">
@@ -308,6 +344,24 @@
              <returns>Um novo item atualizado</returns>
              <response code="200">Retorna o novo item atualizado</response>
              <response code="400">Se o item não for atualizado</response>
+             <response code="401">Não autorizado</response>
+        </member>
+        <member name="M:APIControleFinanceiro.Controllers.v1.Receitas.ReceitasController.PostCsv(Microsoft.AspNetCore.Http.IFormFile)">
+             <summary>
+             Importação em lote de receitas.
+             </summary>
+             <remarks>
+             Exemplo:
+            
+                 POST /Receitas/Importar
+                 
+                 Arquivo formato .csv
+            
+             </remarks>
+             <param name="value"></param>
+             <returns>Novos itens criados.</returns>
+             <response code="200">Retorna a quantidade de itens adicionados</response>
+             <response code="400">Se houver erro na importação</response>
              <response code="401">Não autorizado</response>
         </member>
         <member name="M:APIControleFinanceiro.Controllers.v1.Storage.DownloadController.Post(System.String)">

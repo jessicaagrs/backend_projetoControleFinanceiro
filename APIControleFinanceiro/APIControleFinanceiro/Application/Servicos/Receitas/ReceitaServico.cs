@@ -1,4 +1,6 @@
-﻿using APIControleFinanceiro.Domain.Models.CategoriasReceitas;
+﻿using APIControleFinanceiro.Application.Helper;
+using APIControleFinanceiro.Domain.Models.CategoriasReceitas;
+using APIControleFinanceiro.Domain.Models.Despesas;
 using APIControleFinanceiro.Domain.Models.Receitas;
 using APIControleFinanceiro.Domain.Models.Usuarios;
 
@@ -56,23 +58,45 @@ namespace APIControleFinanceiro.Application.Servicos.Receitas
             return atualizacao;
         }
 
-        private async Task VerificarCategoria(string categoriaId)
+        private async Task VerificarCategoria(string categoriaId, int linha = 0)
         {
             var categorias = await _categoriaReceitaRepositorio.GetCategoriasReceitasAsync();
             var existeCategoria = categorias.Any(c => c.Id == categoriaId);
 
+            var msg = linha == 0 ? "A categoria informada não existe" : $"A categoria informada não existe. Linha {linha}";
+
             if (!existeCategoria)
-                throw new Exception("A categoria informada não existe");
+                throw new Exception(msg);
         }
 
-        private async Task VerificarUsuario(string usuarioId)
+        private async Task VerificarUsuario(string usuarioId, int linha = 0)
         {
             var usuarios = await _usuarioRepositorio.GetUsuariosAsync();
             var existeUsuario = usuarios.Any(c => c.Id == usuarioId);
 
+            var msg = linha == 0 ? "O usuário informado não existe" : $"O usuário informado não existe. Linha {linha}";
+
             if (!existeUsuario)
-                throw new Exception("O usuário informado não existe");
+                throw new Exception(msg);
         }
 
+        public async Task<int> AdicionarLista(IFormFile file)
+        {
+            if (file == null)
+                throw new Exception("Selecione um arquivo excel para importar os dados.");
+
+            var excel = new ExcelHelper<Receita>(file);
+            var receitas = excel.GetValues();
+
+            for (int i = 0; i < receitas.Count; i++)
+            {
+                var linha = i + 1;
+                await VerificarCategoria(receitas[i].CategoriaId, linha);
+                await VerificarUsuario(receitas[i].UsuarioId, linha);
+            }
+            var qtdItens = await _receitaRepositorio.CreateListReceitasAsync(receitas);
+
+            return qtdItens;
+        }
     }
 }

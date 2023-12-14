@@ -174,5 +174,45 @@ namespace APIControleFinanceiro.Controllers.v1.Despesas
                 return BadRequest(errorResponse);
             }
         }
+
+        // POST api/Despesas/Importar
+        /// <summary>
+        /// Importação em lote de despesas.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /Despesas/Importar
+        ///     
+        ///     Arquivo formato .csv
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Novos itens criados.</returns>
+        /// <response code="200">Retorna a quantidade de itens adicionados</response>
+        /// <response code="400">Se houver erro na importação</response>
+        /// <response code="401">Não autorizado</response>
+        [HttpPost()]
+        //[Authorize]
+        [Route("/Despesas/Importar")]
+        [ApiVersion("1.0")]
+        public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
+        {
+            try
+            {
+                var resultado = await _despesaServico.AdicionarLista(arquivoCsv);
+                return Ok($"Total de {resultado} despesas adicionadas");
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    Message = "Erro ao importar despesas",
+                    Error = ex.Message
+                };
+
+                return BadRequest(errorResponse);
+            }
+        }
     }
 }

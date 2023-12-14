@@ -33,5 +33,11 @@ namespace APIControleFinanceiro.Infra.Repositorios.CategoriasReceitas
             return categoriaReceita;
         }
 
+        public async Task<int> CreateListCategoriasReceitasAsync(List<CategoriaReceita> categoriaDespesas)
+        {
+            await _categoriaReceitaCollection.InsertManyAsync(categoriaDespesas);
+
+            return categoriaDespesas.Count();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using APIControleFinanceiro.Domain.Models.CategoriasReceitas;
-using APIControleFinanceiro.Domain.Models.Receitas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -159,6 +158,46 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasReceitas
                 var errorResponse = new
                 {
                     Message = "Erro ao atualizar categoria de receita",
+                    Error = ex.Message
+                };
+
+                return BadRequest(errorResponse);
+            }
+        }
+
+        // POST api/CategoriasReceitas/Importar
+        /// <summary>
+        /// Importação em lote de categorias de receita.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo:
+        ///
+        ///     POST /CategoriasReceitas/Importar
+        ///     
+        ///     Arquivo formato .csv
+        ///
+        /// </remarks>
+        /// <param name="value"></param>
+        /// <returns>Novos itens criados.</returns>
+        /// <response code="200">Retorna a quantidade de itens adicionados</response>
+        /// <response code="400">Se houver erro na importação</response>
+        /// <response code="401">Não autorizado</response>
+        [HttpPost()]
+        [Authorize]
+        [Route("/CategoriasReceitas/Importar")]
+        [ApiVersion("1.0")]
+        public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
+        {
+            try
+            {
+                var resultado = await _categoriaReceitaServico.AdicionarLista(arquivoCsv);
+                return Ok($"Total de {resultado} categorias adicionadas");
+            }
+            catch (Exception ex)
+            {
+                var errorResponse = new
+                {
+                    Message = "Erro ao importar categorias de receita",
                     Error = ex.Message
                 };
 

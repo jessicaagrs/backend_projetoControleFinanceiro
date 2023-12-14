@@ -36,5 +36,11 @@ namespace APIControleFinanceiro.Infra.Repositorios.Receitas
             return receita;
         }
 
+        public async Task<int> CreateListReceitasAsync(List<Receita> receitas)
+        {
+            await _receitaCollection.InsertManyAsync(receitas);
+
+            return receitas.Count();
+        }
     }
 }

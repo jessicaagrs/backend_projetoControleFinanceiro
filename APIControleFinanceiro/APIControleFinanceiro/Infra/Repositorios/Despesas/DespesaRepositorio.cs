@@ -1,6 +1,7 @@
 ﻿using APIControleFinanceiro.Domain.Models.Despesas;
 using MongoDB.Driver;
 using APIControleFinanceiro.Infra.Repositorios.Database;
+using APIControleFinanceiro.Domain.Models.CategoriasReceitas;
 
 namespace APIControleFinanceiro.Infra.Repositorios.Despesas
 {
@@ -36,5 +37,11 @@ namespace APIControleFinanceiro.Infra.Repositorios.Despesas
             return despesa;
         }
 
+        public async Task<int> CreateListDespesasAsync(List<Despesa> despesas)
+        {
+            await _despesaCollection.InsertManyAsync(despesas);
+
+            return despesas.Count();
+        }
     }
 }
