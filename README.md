@@ -19,7 +19,7 @@
   <!-- <img src="https://uploaddeimagens.com.br/images/004/543/860/full/vue.png?1689275780" /> -->
 </p>
 
-Status do Projeto: :heavy_check_mark: <!-- > :heavy_check_mark:--> Concluído <!-- > :warning:-->
+Status do Projeto:  :heavy_check_mark: Concluído <!-- > :warning:-->
 
 ### Tópicos 
 
