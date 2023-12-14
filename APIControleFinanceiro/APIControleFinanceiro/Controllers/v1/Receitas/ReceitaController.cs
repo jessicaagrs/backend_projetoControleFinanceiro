@@ -189,7 +189,7 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
         /// <response code="400">Se houver erro na importação</response>
         /// <response code="401">Não autorizado</response>
         [HttpPost()]
-        //[Authorize]
+        [Authorize]
         [Route("/Receitas/Importar")]
         [ApiVersion("1.0")]
         public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)
