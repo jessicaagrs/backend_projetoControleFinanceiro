@@ -31,10 +31,9 @@ Status do Projeto: :heavy_check_mark: <!-- > :heavy_check_mark:--> Concluído <!
 
 <!-- :small_blue_diamond: [Pré-requisitos](#pré-requisitos) -->
 
-:small_blue_diamond: [Rotas da API](#como-rodar-a-aplicação-arrow_forward)
+:small_blue_diamond: [Como Rodar Aplicação](#como-rodar-a-aplicação-arrow_forward)
 
 :small_blue_diamond: [Dependencias e libs utilizadas](#dependencias-e-libs-utilizadas-books)
-
 ## Descrição do projeto :pencil:
 
 <p align="justify">
@@ -43,8 +42,8 @@ Status do Projeto: :heavy_check_mark: <!-- > :heavy_check_mark:--> Concluído <!
 
 ## Funcionalidades :wrench:
 
-:heavy_check_mark: Crias categorias para despesas.
-:heavy_check_mark: Crias categorias para receitas.
+:heavy_check_mark: Criar categorias para despesas.
+:heavy_check_mark: Criar categorias para receitas.
 :heavy_check_mark: Cadastrar despesas com cartão.
 :heavy_check_mark: Cadastrar receitas com cartão.
 :heavy_check_mark: Cadastro de usuário.
