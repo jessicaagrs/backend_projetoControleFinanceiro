@@ -72,7 +72,7 @@ No terminal clone o projeto:
 git clone https://github.com/jessicaagrs/backend_projetoControleFinanceiro.git
 
 ```
-
+Executar APIControleFinanceiro.sln com Visual Studio 2022 e executar API.
 <!-- > Link para execução do projeto no browser: https://jessicaagrs.github.io/projeto_shopTech_javascript/ -->
 <!-- ## Como rodar os testes
 
