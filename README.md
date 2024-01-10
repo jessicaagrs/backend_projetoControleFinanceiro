@@ -71,8 +71,13 @@ Liste todas as dependencias e libs que o usuário deve ter instalado na máquina
 No terminal clone o projeto: 
 
 ```
-git clone https://github.com/jessicaagrs/backend_projetoControleFinanceiro.git
+$ git clone https://github.com/jessicaagrs/backend_projetoControleFinanceiro.git
 
+$ cd backend_projetoControleFinanceiro/APIControleFinanceiro
+
+$ start devenv "APIControleFinanceiro.sln"
+
+Clicar no botão verde menu superior em API para executar a API 
 ```
 Executar APIControleFinanceiro.sln com Visual Studio 2022 e executar API.
 <!-- > Link para execução do projeto no browser: https://jessicaagrs.github.io/projeto_shopTech_javascript/ -->
