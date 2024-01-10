@@ -77,9 +77,9 @@ $ cd backend_projetoControleFinanceiro/APIControleFinanceiro
 
 $ start devenv "APIControleFinanceiro.sln"
 
-Clicar no botão verde menu superior em API para executar a API 
+Clicar no botão verde menu superior em API para executar.
+Obs: Rodar com Visual Studio 2022.
 ```
-Executar APIControleFinanceiro.sln com Visual Studio 2022 e executar.
 <!-- > Link para execução do projeto no browser: https://jessicaagrs.github.io/projeto_shopTech_javascript/ -->
 <!-- ## Como rodar os testes
 
