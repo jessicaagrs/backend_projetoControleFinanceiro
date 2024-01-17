@@ -61,7 +61,7 @@ namespace APIControleFinanceiro.Controllers.v1.Despesas
         ///     {
         ///         "descricao": "string",
         ///         "valor": 0,
-        ///         "categoriaId": "string"
+        ///         "categoriaId": "string",
         ///         "data": "2023-12-12T14:02:55.118Z"
         ///     }
         ///
@@ -144,7 +144,7 @@ namespace APIControleFinanceiro.Controllers.v1.Despesas
         ///         "id": "string",
         ///         "descricao": "string",
         ///         "valor": 0,
-        ///         "categoriaId": "string"
+        ///         "categoriaId": "string",
         ///         "data": "2023-12-12T14:02:55.118Z"
         ///     }
         ///

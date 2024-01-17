@@ -82,8 +82,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Documentação APIControleFinanceiro",
-        Description = "Rotas da aplicação",
+        Title = "Documentacao APIControleFinanceiro",
+        Description = "Rotas da aplicacao\nCaso tenha cadastro de usuário faça login com seu e-mail e senha, o mesmo retornará o token de acesso aos endpoints.\nPara novos usuários deve ser criado um cadastro.",
         Contact = new OpenApiContact() { Name = "Jessica", Email = "jessicaag.rs@gmail.com" },
         License = new OpenApiLicense()
         {
