@@ -28,6 +28,7 @@ namespace APIControleFinanceiro.Controllers.v1.Despesas
         /// <response code="400">Se houver erro</response>
         /// <response code="401">Não autorizado</response>
         [HttpGet()]
+        [Authorize]
         [ApiVersion("1.0")]
 
         public async Task<IActionResult> Get(int numeroPagina, int quantidadePorPagina)
@@ -193,7 +194,7 @@ namespace APIControleFinanceiro.Controllers.v1.Despesas
         /// <response code="400">Se houver erro na importação</response>
         /// <response code="401">Não autorizado</response>
         [HttpPost()]
-        //[Authorize]
+        [Authorize]
         [Route("/Despesas/Importar")]
         [ApiVersion("1.0")]
         public async Task<IActionResult> PostCsv(IFormFile arquivoCsv)

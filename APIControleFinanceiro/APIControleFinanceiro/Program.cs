@@ -165,23 +165,20 @@ var app = builder.Build();
 
 var versionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseExceptionHandler("/error-development");
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    foreach (var description in versionDescriptionProvider.ApiVersionDescriptions)
     {
-        foreach (var description in versionDescriptionProvider.ApiVersionDescriptions)
-        {
-            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
-                $"Web APi - {description.GroupName.ToUpper()}");
-        }
-    });
-}
+        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+            $"Web APi - {description.GroupName.ToUpper()}");
+    }
+});
+
+if (app.Environment.IsDevelopment())
+    app.UseExceptionHandler("/error-development");
 else
-{
     app.UseExceptionHandler("/error");
-}
 
 app.UseCors();
 
