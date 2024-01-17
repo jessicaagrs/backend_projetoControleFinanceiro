@@ -80,7 +80,7 @@ $ start devenv "APIControleFinanceiro.sln"
 Clicar no botão verde menu superior em API para executar.
 Obs: Rodar com Visual Studio 2022.
 ```
-<!-- > Link para execução do projeto no browser: https://jessicaagrs.github.io/projeto_shopTech_javascript/ -->
+Link para execução do projeto no browser: [Swagger API](https://financeappjessicaagrs.azurewebsites.net/swagger/index.html) 
 <!-- ## Como rodar os testes
 
 Coloque um passo a passo para executar os testes
