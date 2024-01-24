@@ -92,7 +92,6 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
         /// <response code="400">Se houver erro no logout</response>
         /// <response code="401">Não autorizado</response>
         [HttpPost()]
-        [Authorize]
         [Route("/Logout/")]
         [ApiVersion("1.0")]
         public async Task<IActionResult> Logout(TokenRevogado tokenRevogado)
