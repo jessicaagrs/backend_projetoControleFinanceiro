@@ -32,7 +32,7 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
         ///     POST /Login
         ///     {
         ///         "emailLogin": "string",
-        ///         "SnehaLogin": "string"
+        ///         "SenhaLogin": "string"
         ///     }
         ///
         /// </remarks>
@@ -52,6 +52,7 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
                 var token = AutenticacaoServico.GerarToken(usuario);
 
                 usuario.TokenAcesso = token;
+                usuario.Logado = true;
 
                 await _usuarioServico.Atualizar(usuario);
 
@@ -99,6 +100,13 @@ namespace APIControleFinanceiro.Controllers.v1.Logins
             try
             {
                 var usuarioExiste = await _loginServico.VerificarEmailLogout(tokenRevogado.Email);
+
+                if (usuarioExiste != null)
+                {
+                    usuarioExiste.Logado = false;
+                    await _usuarioServico.Atualizar(usuarioExiste); 
+                }
+
                 _revogarTokensServico.RevogarTokens(tokenRevogado);
 
                 return Ok(new

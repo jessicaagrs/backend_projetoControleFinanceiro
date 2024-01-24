@@ -57,7 +57,9 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
         ///     POST /Receita
         ///     {
         ///         "descricao": "string",
+        ///         "origem": "string",
         ///         "valor": 0,
+        ///         "usuarioId": "string",
         ///         "categoriaId": "string",
         ///         "data": "2023-12-12T14:02:55.118Z"
         ///     }
@@ -138,7 +140,9 @@ namespace APIControleFinanceiro.Controllers.v1.Receitas
         ///     {
         ///         "id": "string",
         ///         "descricao": "string",
+        ///         "origem": "string",
         ///         "valor": 0,
+        ///         "usuarioId": "string",
         ///         "categoriaId": "string",
         ///         "data": "2023-12-12T14:02:55.118Z"
         ///     }

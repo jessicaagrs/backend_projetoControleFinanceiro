@@ -9,6 +9,7 @@ namespace APIControleFinanceiro.Domain.Models.Receitas
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         public string Descricao { get; set; } = string.Empty;
+        public string Origem { get; set; } = string.Empty;
         public decimal Valor { get; set; } = decimal.MinValue;
 
         [BsonRepresentation(BsonType.ObjectId)]

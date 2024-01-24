@@ -18,21 +18,22 @@ namespace APIControleFinanceiro.Controllers.v1.Usuarios
 
         // GET api/Usuarios
         /// <summary>
-        /// Consulta usuários cadastrados.
+        /// Consulta usuário cadastrado.
         /// </summary>
         /// <param name="value"></param>
-        /// <returns>Lista de usuários cadastrados.</returns>
-        /// <response code="200">Retorna lista dos itens</response>
+        /// <returns>O usuário cadastrado.</returns>
+        /// <response code="200">Retorna um objeto com dados</response>
         /// <response code="400">Se houver erro</response>
         /// <response code="401">Não autorizado</response>
         [HttpGet()]
         [Authorize()]
+        [Route("/Usuarios/{email}")]
         [ApiVersion("1.0")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string email)
         {
             try
             {
-                var usuarios = await _usuarioServico.ObterTodos();
+                var usuarios = await _usuarioServico.ObterPorEmail(email);
                 return Ok(usuarios);
             }
             catch (Exception ex)

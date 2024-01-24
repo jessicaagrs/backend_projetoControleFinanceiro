@@ -11,6 +11,10 @@ namespace APIControleFinanceiro.Domain.Validacoes.Despesas
                 .NotEmpty()
                 .WithMessage("A descrição é obrigatória");
 
+            RuleFor(d => d.Local)
+                .NotEmpty()
+                .WithMessage("O local da despesa é obrigatório");
+
             RuleFor(d => d.Valor)
                 .Must(valor => valor != decimal.Zero)
                 .WithMessage("O valor da despesa não pode ser zero");

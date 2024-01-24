@@ -11,6 +11,10 @@ namespace APIControleFinanceiro.Domain.Validacoes.Receitas
                  .NotEmpty()
                  .WithMessage("A descrição é obrigatória");
 
+            RuleFor(r => r.Origem)
+                .NotEmpty()
+                .WithMessage("A origem da receita é obrigatória");
+
             RuleFor(r => r.Valor)
                 .Must(valor => valor != decimal.Zero)
                 .WithMessage("O valor da receita não pode ser zero");

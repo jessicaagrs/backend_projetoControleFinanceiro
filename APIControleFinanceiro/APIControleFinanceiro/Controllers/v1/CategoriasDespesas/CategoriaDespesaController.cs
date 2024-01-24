@@ -56,7 +56,8 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasDespesas
         ///
         ///     POST /CategoriasDespesas
         ///     {
-        ///         "descricao": "string"
+        ///         "descricao": "string",
+        ///         "usuarioId": "string"
         ///     }
         ///
         /// </remarks>
@@ -134,7 +135,8 @@ namespace APIControleFinanceiro.Controllers.v1.CategoriasDespesas
         ///     POST /CategoriasDespesas
         ///     {
         ///         "id": "string",
-        ///         "descricao": "string"
+        ///         "descricao": "string",
+        ///         "usuarioId": "string"
         ///     }
         ///
         /// </remarks>

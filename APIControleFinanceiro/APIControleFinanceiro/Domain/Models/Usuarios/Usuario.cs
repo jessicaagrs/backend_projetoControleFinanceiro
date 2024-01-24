@@ -18,5 +18,6 @@ namespace APIControleFinanceiro.Domain.Models.Usuarios
         public DateTime ValidadeCartaoCredito { get; set; } = DateTime.MinValue;
         public string BandeiraCartaoCredito { get; set; } = string.Empty;
         public string BancoCartaoCredito { get; set; } = string.Empty;
+        public bool Logado { get; set; } = false;
     }
 }

@@ -23,7 +23,8 @@
             
                  POST /CategoriasDespesas
                  {
-                     "descricao": "string"
+                     "descricao": "string",
+                     "usuarioId": "string"
                  }
             
              </remarks>
@@ -53,7 +54,8 @@
                  POST /CategoriasDespesas
                  {
                      "id": "string",
-                     "descricao": "string"
+                     "descricao": "string",
+                     "usuarioId": "string"
                  }
             
              </remarks>
@@ -100,7 +102,8 @@
             
                  POST /CategoriasReceitas
                  {
-                     "descricao": "string"
+                     "descricao": "string",
+                     "usuarioId": "string"
                  }
             
              </remarks>
@@ -130,7 +133,8 @@
                  POST /CategoriasReceitas
                  {
                      "id": "string",
-                     "descricao": "string"
+                     "descricao": "string",
+                     "usuarioId": "string"
                  }
             
              </remarks>
@@ -178,7 +182,9 @@
                  POST /Despesa
                  {
                      "descricao": "string",
+                     "local": "string",
                      "valor": 0,
+                     "usuarioId": "string",
                      "categoriaId": "string",
                      "data": "2023-12-12T14:02:55.118Z"
                  }
@@ -211,7 +217,9 @@
                  {
                      "id": "string",
                      "descricao": "string",
+                     "local": "string",
                      "valor": 0,
+                     "usuarioId": "string",
                      "categoriaId": "string",
                      "data": "2023-12-12T14:02:55.118Z"
                  }
@@ -251,7 +259,7 @@
                  POST /Login
                  {
                      "emailLogin": "string",
-                     "SnehaLogin": "string"
+                     "SenhaLogin": "string"
                  }
             
              </remarks>
@@ -301,7 +309,9 @@
                  POST /Receita
                  {
                      "descricao": "string",
+                     "origem": "string",
                      "valor": 0,
+                     "usuarioId": "string",
                      "categoriaId": "string",
                      "data": "2023-12-12T14:02:55.118Z"
                  }
@@ -334,7 +344,9 @@
                  {
                      "id": "string",
                      "descricao": "string",
+                     "origem": "string",
                      "valor": 0,
+                     "usuarioId": "string",
                      "categoriaId": "string",
                      "data": "2023-12-12T14:02:55.118Z"
                  }
@@ -382,13 +394,13 @@
              <response code="400">Se a foto não puder ser obtida</response>
              <response code="401">Não autorizado</response>
         </member>
-        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Get">
+        <member name="M:APIControleFinanceiro.Controllers.v1.Usuarios.UsuariosController.Get(System.String)">
             <summary>
-            Consulta usuários cadastrados.
+            Consulta usuário cadastrado.
             </summary>
             <param name="value"></param>
-            <returns>Lista de usuários cadastrados.</returns>
-            <response code="200">Retorna lista dos itens</response>
+            <returns>O usuário cadastrado.</returns>
+            <response code="200">Retorna um objeto com dados</response>
             <response code="400">Se houver erro</response>
             <response code="401">Não autorizado</response>
         </member>

@@ -20,9 +20,14 @@ namespace APIControleFinanceiro.Application.Servicos.Usuarios
             return _usuarioRepositorio.GetUsuariosAsync();
         }
 
-        public Task<Usuario> ObterPorId(string id)
+        public async Task<Usuario> ObterPorId(string id)
         {
-            return _usuarioRepositorio.GetUsuarioPorIdAsync(id);
+            var usuario = await _usuarioRepositorio.GetUsuarioPorIdAsync(id);
+
+            if (usuario == null)
+                throw new Exception("Usuário não encontrado");
+
+            return usuario;
         }
 
         public async Task<Usuario> Adicionar(Usuario usuario)
@@ -117,5 +122,14 @@ namespace APIControleFinanceiro.Application.Servicos.Usuarios
             return usuario;
         }
 
+        public async Task<Usuario> ObterPorEmail(string email)
+        {
+            var usuario = await _usuarioRepositorio.GetUsuarioEmailAsync(email);
+
+            if (usuario == null)
+                throw new Exception("Usuário não encontrado");
+
+            return usuario;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace APIControleFinanceiro.Application.Servicos.Autorizacoes
 
             if (_revogarTokensServico.TokenRevogado(token))
             {
-                context.Result = new ForbidResult();
+                context.Result = new UnauthorizedResult();
             }
         }
     }
