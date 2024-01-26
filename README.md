@@ -21,7 +21,6 @@
 
 Status do Projeto: Concluído <!-- > :warning:-->
 
-Conhecer o código fonte do FRONT END dessa aplicação [CLIQUE AQUI](https://github.com/jessicaagrs/frontend_projetoControleFinanceiro)
 
 ### Tópicos 
 
